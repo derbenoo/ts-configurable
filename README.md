@@ -1,4 +1,5 @@
 <img src="docs/ts-configurable.png" alt="dotenv" align="right" />
+
 # TS-Configurable
 
 :sparkles: **Make all properties of a class configurable using only one decorator!** :sparkles:
@@ -36,6 +37,10 @@ ServerConfig { host: 'localhost', port: 4200 }
 # Change host via environment variable
 $ host=0.0.0.0 ts-node server-config.ts
 ServerConfig { host: '0.0.0.0', port: 3000 }
+
+# Throw an error if a value with a different type was assigned
+$ port=random ts-node server-config.ts
+Property 'ServerConfig.port' is of type number but a value of type string ('"random"') was assigned!
 ```
 
 ## :tada: Features
