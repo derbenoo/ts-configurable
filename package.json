@@ -16,7 +16,7 @@
     "lint": "tslint --project ./",
     "debug": "TS_NODE_PROJECT=tsconfig.json TS_NODE_FILE=true node -r ts-node/register --inspect=0.0.0.0 --inspect-brk example/index.ts",
     "start": "ts-node --project tsconfig.json example/simple.ts",
-    "gen-doc": "typedoc --hideGenerator --tsconfig tsconfig.json --out docs/ src/"
+    "gen-doc": "typedoc --theme markdown --mdHideSources --hideGenerator --tsconfig tsconfig.json --out docs/typedoc src/lib/configurable.ts"
   },
   "husky": {
     "hooks": {
@@ -53,7 +53,8 @@
     "ts-jest": "^24.0.0",
     "ts-node": "^8.0.2",
     "tslint": "^5.12.1",
-    "typedoc": "^0.14.2",
+    "typedoc": "~0.14.2",
+    "typedoc-plugin-markdown": "~1.1.27",
     "typescript": "^3.3.3"
   },
   "dependencies": {
