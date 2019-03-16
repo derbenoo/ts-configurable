@@ -61,6 +61,7 @@ Property 'ServerConfig.port' is of type number but a value of type string ('"ran
 ### @Configurable([options])
 
 ▸ **Configurable**(options?: `IDecoratorOptions`)
+
 Class decorator for marking a class configurable: The values of all class properties can be set using the following sources, listed by priority (1 = highest):
 
 1.  Command line arguments
@@ -70,69 +71,45 @@ Class decorator for marking a class configurable: The values of all class proper
 
 The final values for the config instance's properties are calculated upon instantiation.
 
-#### `<Optional>` options.enforceReadonly
-
-**● enforceReadonly**: `boolean`
+##### `<Optional>` options.enforceReadonly: `boolean`
 
 Enforce that all properties are read-only by using `Object.freeze()` (default: true)
 
-#### `<Optional>` options.loadEnvFromFile
-
-**● loadEnvFromFile**: `false` | [DotenvConfigOptions](https://www.npmjs.com/package/dotenv#options)
+##### `<Optional>` options.loadEnvFromFile: `false` | [DotenvConfigOptions](https://www.npmjs.com/package/dotenv#options)
 
 Apply environment variables from a file to the current process.env
 
-#### `<Optional>` options.parseArgv
-
-**● parseArgv**: `false` | `IArgvOptions`
+##### `<Optional>` options.parseArgv: `false` | `IArgvOptions`
 
 Whether to parse command line arguments (default: true)
 
-#### `<Optional>` options.parseArgv.prefix
-
-**● prefix**: _`string`_
+##### `<Optional>` options.parseArgv.prefix: _`string`_
 
 Prefix for command line arguments (default: '')
 
-#### `<Optional>` options.parseEnv
-
-**● parseEnv**: `false` | `IEnvOptions`
+##### `<Optional>` options.parseEnv: `false` | `IEnvOptions`
 
 Whether to parse environment variables (default: true)
 
-#### `<Optional>` options.parseEnv.lowerCase
-
-**● lowerCase**: _`boolean`_
+##### `<Optional>` options.parseEnv.lowerCase: _`boolean`_
 
 Whether to lower-case environment variables (default: false)
 
-#### `<Optional>` options.parseEnv.prefix
-
-**● prefix**: _`string`_
+##### `<Optional>` options.parseEnv.prefix: _`string`_
 
 Prefix for environment variables (default: '')
 
-#### `<Optional>` options.parseEnv.separator
-
-**● separator**: _`string`_
+##### `<Optional>` options.parseEnv.separator: _`string`_
 
 Seperator for environment variables (default: '\_\_')
 
-#### `<Optional>` options.parseValues
-
-**● parseValues**: _`boolean`_
+##### `<Optional>` options.parseValues: _`boolean`_
 
 Attempt to parse well-known values (e.g. 'false', 'null', 'undefined' and JSON values) into their proper types (default: true)
 
-#### `<Optional>` options.strictTypeChecking
-
-**● strictTypeChecking**: _`boolean`_
+##### `<Optional>` options.strictTypeChecking: _`boolean`_
 
 Throw an error if a config entry is set to a value of a different type than the default value (e.g. assigning a number to a string property) (default: true)
-
-## Hierarchical atomic object merging
-
-## Provide options and config values via constructor
 
 ## Example: Nested Properties
 
@@ -198,5 +175,9 @@ If you want to explicitly set a field to `false` instead of just leaving it `und
 $ start pizza-app --cash --no-paypal
 { cash: true, paypal: false }
 ```
+
+## Hierarchical atomic object merging
+
+## Provide options and config values via constructor
 
 ## Test Coverage
