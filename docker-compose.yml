@@ -1,0 +1,18 @@
+####################################################################################
+# Docker-compose file for spinning up a node development container
+# USAGE: docker-compose up -d
+####################################################################################
+
+version: "3.2"
+
+services:
+  node-dev:
+    container_name: node-dev
+    hostname: node-dev
+    image: derbenoo/node-dev:latest
+    volumes:
+      - type: bind
+        source: .
+        target: /app/
+    ports:
+      - "127.0.0.1:9229:9229" # Node debugging port

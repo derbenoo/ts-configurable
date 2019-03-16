@@ -1,0 +1,5 @@
+{
+  "verbose": false,
+  "preset": "ts-jest",
+  "rootDir": "./"
+}
