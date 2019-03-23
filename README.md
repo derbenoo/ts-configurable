@@ -220,6 +220,16 @@ $ ts-node order-pizza.ts --order.recipient=Jonny"
 }
 ```
 
+## :book: Loading Environment Variables from a File
+
+It can be useful during development to keep a local `.env` file containing configuration values that the developer wants to set for himself. The file is typically excluded from version control (e.g., by adding it to the `.gitignore` of the repository). When using the `@Configurable()` decorator, environment variables specified in a `.env` file located in the current working directory are loaded into `process.env` before the configuration object is created. However, another path can be specified using the `loadEnvFromFile.path` option.
+
+This functionality is implemented using the [dotenv](https://www.npmjs.com/package/dotenv/v/6.2.0) package. You can find out more by reading the package's documentation:
+
+- [Options](https://www.npmjs.com/package/dotenv/v/6.2.0#options)
+- [Rules](https://www.npmjs.com/package/dotenv/v/6.2.0#rules)
+- [FAQ](https://www.npmjs.com/package/dotenv/v/6.2.0#faq)
+
 ## :grey_exclamation: Negating Boolean Arguments
 
 If you want to explicitly set a field to `false` instead of just leaving it `undefined` or to override a default you can add a `no-` before the key: `--no-key`.
