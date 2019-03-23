@@ -1,4 +1,4 @@
-import { Configurable } from '../lib/configurable';
+import { Configurable } from './configurable';
 
 /**
  * Keep test spec specific environment variable and command line argument prefixes to avoid collisions during parallel execution

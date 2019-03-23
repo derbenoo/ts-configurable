@@ -1,4 +1,4 @@
-<img src="docs/ts-configurable.png" alt="dotenv" align="right" />
+<img src="./ts-configurable.png" alt="ts-configurable" align="right" />
 
 # TS-Configurable
 

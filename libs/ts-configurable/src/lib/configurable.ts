@@ -17,9 +17,9 @@ import { BaseConfig } from './base-config';
  */
 function getOptions(decoratorOptions: IDecoratorOptions, constructorOptions: IDecoratorOptions): IDecoratorOptions {
   const defaultOptions: IDecoratorOptions = {
-    parseArgv: { prefix: '' },
-    parseEnv: { lowerCase: false, prefix: '', separator: '__' },
-    loadEnvFromFile: { encoding: 'utf8', debug: false },
+    parseArgv: false,
+    parseEnv: false,
+    loadEnvFromFile: false,
     parseValues: true,
     strictTypeChecking: true,
     enforceReadonly: true,
@@ -44,7 +44,11 @@ function getOptions(decoratorOptions: IDecoratorOptions, constructorOptions: IDe
  * @param ConfigClass Class the @Configurable() decorator was applied to
  * @param constructorValues Config values passed via the config class constructor
  */
-function getConfig<T extends { new (...args: any[]): {} }>(options: IDecoratorOptions, ConfigClass: T, constructorValues: Partial<T>): Partial<T> {
+function getConfig<T extends { new (...args: any[]): {} }>(
+  options: IDecoratorOptions,
+  ConfigClass: T,
+  constructorValues: Partial<T>
+): Partial<T> {
   // Collect all config values sources in order of hierarchy using an nconf provider
   const configProvider = new Provider();
 
@@ -120,7 +124,8 @@ export function Configurable(decoratorOptions: IDecoratorOptions = {}) {
         super(...args);
 
         // Parse options provided by the constructor (first argument) if the BaseConfig class was extended, ignore otherwise
-        const constructorOptions: IConstructorOptions<T> = new ConfigClass() instanceof BaseConfig && isPlainObject(args[0]) ? args[0] : {};
+        const constructorOptions: IConstructorOptions<T> =
+          new ConfigClass() instanceof BaseConfig && isPlainObject(args[0]) ? args[0] : {};
 
         const options = getOptions(decoratorOptions, constructorOptions.options);
 
