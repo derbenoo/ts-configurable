@@ -1,3 +1,6 @@
+import * as path from 'path';
+import * as os from 'os';
+import * as fs from 'fs';
 import { Configurable } from './configurable';
 
 /**
@@ -297,5 +300,30 @@ describe('libs/config: @Configurable() decorator', () => {
     }
     const config = new PizzaConfig();
     expect(config.id).toBe(23);
+  });
+
+  it('Load environment variables from file', () => {
+    // Create temporary environment variables file
+    const envFilepath = path.join(os.tmpdir(), '.env');
+    fs.writeFileSync(envFilepath, 'spec_configurable_h_id=2\nspec_configurable_h_order__delivered=false');
+
+    @Configurable({
+      strictTypeChecking: true,
+      parseEnv: {
+        separator: '__',
+        lowerCase: false,
+        prefix: 'spec_configurable_h_',
+      },
+      parseValues: true,
+      loadEnvFromFile: { path: envFilepath },
+    })
+    class PizzaConfig extends BasePizzaConfig {}
+    const config = new PizzaConfig();
+
+    // Delete temporary environment variables file again
+    fs.unlinkSync(envFilepath);
+
+    expect(config.id).toBe(2);
+    expect(config.order.delivered).toBe(false);
   });
 });
