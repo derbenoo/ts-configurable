@@ -192,4 +192,6 @@ $ start pizza-app --cash --no-paypal
 
 ## Provide options and config values via constructor
 
-## Test Coverage
+## Contributing
+
+You are welcome to contribute to the ts-configurable GitHub repository! All infos can be found here: [How to contribute](https://github.com/derbenoo/ts-configurable/blob/master/CONTRIBUTING.md)
