@@ -20,9 +20,13 @@
     "copy-package-json": "cp libs/ts-configurable/package.json dist/libs/ts-configurable",
     "copy-files": "run-s copy-readme copy-license copy-changelog copy-package-json"
   },
-  "private": false,
+  "greenkeeper": {
+    "ignore": [
+      "dotenv"
+    ]
+  },
   "dependencies": {
-    "dotenv": "~7.0.0",
+    "dotenv": "~6.2.0",
     "is-plain-object": "~2.0.4",
     "nconf": "~0.10.0"
   },

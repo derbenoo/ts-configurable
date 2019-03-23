@@ -10,13 +10,18 @@
   "bugs": {
     "url": "https://github.com/derbenoo/ts-configurable/issues"
   },
+  "greenkeeper": {
+    "ignore": [
+      "dotenv"
+    ]
+  },
   "license": "MIT",
   "homepage": "https://github.com/derbenoo/ts-configurable",
   "main": "./index.js",
   "types": "./index.d.ts",
   "author": "Benjamin Assadsolimani (derbenoo)",
   "dependencies": {
-    "dotenv": "~7.0.0",
+    "dotenv": "~6.2.0",
     "is-plain-object": "~2.0.4",
     "nconf": "~0.10.0"
   }
