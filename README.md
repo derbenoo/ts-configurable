@@ -166,6 +166,7 @@ ServerConfig { host: '0.0.0.0', port: 3000 }
 For nested configuration properties, it is recommended to define a new type for keeping type safety:
 
 ```ts
+// order-pizza.ts
 import { Configurable, BaseConfig } from 'ts-configurable';
 
 type TOrder = Partial<{
@@ -198,7 +199,7 @@ Accessing nested properties is done using the `__` separator for environment var
 
 ```
 export pizza_order__delivered=false
-$ start pizza-app --order.recipient=Jonny"
+$ ts-node order-pizza.ts --order.recipient=Jonny"
 
 {
   "id": 5,
@@ -223,9 +224,23 @@ $ start pizza-app --order.recipient=Jonny"
 
 If you want to explicitly set a field to `false` instead of just leaving it `undefined` or to override a default you can add a `no-` before the key: `--no-key`.
 
+```ts
+// pay-pizza.ts
+import { Configurable } from 'ts-configurable';
+
+@Configurable()
+class PizzaConfig {
+  cash = false;
+  debit = true;
+  paypal = true;
+}
+
+console.log(new PizzaConfig());
 ```
-$ start pizza-app --cash --no-paypal
-{ cash: true, paypal: false }
+
+```
+$ ts-node pay-pizza.ts --cash --no-paypal
+{ cash: true, debit: true, paypal: false }
 ```
 
 ## :snowflake: Readonly Properties and Object Freezing
