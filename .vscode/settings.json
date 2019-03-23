@@ -1,9 +1,32 @@
 {
+  // Exclude files
+  "files.exclude": {
+    "**/node_modules": true,
+    "dist/": true,
+    "coverage/": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "dist/": true,
+    "coverage/": true
+  },
+  // Formatting
+  "files.encoding": "utf8",
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
+  "editor.insertSpaces": true,
   "editor.formatOnSave": true,
+  // File associations
+  "files.associations": {
+    "Dockerfile.*": "dockerfile"
+  },
+  // Docker
+  "docker.attachShellCommand.linuxContainer": "/bin/bash",
+  // Linting
   "editor.codeActionsOnSave": {
     "source.fixAll.tslint": true
   }
