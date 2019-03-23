@@ -36,7 +36,9 @@
           "builder": "@nrwl/builders:jest",
           "options": {
             "jestConfig": "libs/ts-configurable/jest.config.js",
-            "tsConfig": "libs/ts-configurable/tsconfig.spec.json"
+            "tsConfig": "libs/ts-configurable/tsconfig.spec.json",
+            "ci": true,
+            "runInBand": true
           }
         }
       },
