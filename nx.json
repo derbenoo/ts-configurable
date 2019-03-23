@@ -1,5 +1,5 @@
 {
-  "npmScope": "ts-config",
+  "npmScope": "ts-configurable",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",
@@ -12,9 +12,7 @@
       "tags": []
     },
     "example-webserver": {
-      "tags": [
-        "example"
-      ]
+      "tags": ["example"]
     }
   }
 }

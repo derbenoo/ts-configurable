@@ -7,13 +7,23 @@
       "root": "libs/ts-configurable",
       "sourceRoot": "libs/ts-configurable/src",
       "projectType": "library",
-      "prefix": "ts-config",
+      "prefix": "ts-configurable",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@nrwl/builders:node-build",
           "options": {
+            "outputPath": "dist/libs/ts-configurable",
+            "main": "libs/ts-configurable/src/index.ts",
             "tsConfig": "libs/ts-configurable/tsconfig.lib.json",
             "project": "libs/ts-configurable/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "externalDependencies": "none"
+            }
           }
         },
         "lint": {

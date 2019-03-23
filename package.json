@@ -3,21 +3,24 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "ng": "ng",
     "cleanup": "rm -r dist/ || true; rm -r coverage/ || true",
     "start": "ng serve",
     "build": "ng build",
+    "prepack": "run-s build copy-files",
     "test": "ng test",
     "lint": "./node_modules/.bin/nx lint && ng lint",
-    "e2e": "ng e2e",
     "format": "./node_modules/.bin/nx format:write",
     "format:write": "./node_modules/.bin/nx format:write",
     "format:check": "./node_modules/.bin/nx format:check",
     "update": "ng update @nrwl/schematics",
     "update:check": "ng update",
-    "workspace-schematic": "./node_modules/.bin/nx workspace-schematic"
+    "copy-readme": "cp README.md dist/libs/ts-configurable",
+    "copy-license": "cp LICENSE dist/libs/ts-configurable",
+    "copy-changelog": "cp CHANGELOG.md dist/libs/ts-configurable",
+    "copy-package-json": "cp libs/ts-configurable/package.json dist/libs/ts-configurable",
+    "copy-files": "run-s copy-readme copy-license copy-changelog copy-package-json"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "dotenv": "~6.2.0",
     "is-plain-object": "~2.0.4",

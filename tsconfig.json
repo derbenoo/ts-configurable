@@ -6,6 +6,7 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "importHelpers": true,
     "target": "es5",
     "module": "es2015",
@@ -15,7 +16,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ts-config/ts-configurable": ["libs/ts-configurable/src/index.ts"]
+      "@ts-configurable": ["libs/ts-configurable/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
