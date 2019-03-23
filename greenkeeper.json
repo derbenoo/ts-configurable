@@ -1,0 +1,10 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "libs/ts-configurable/package.json",
+        "package.json"
+      ]
+    }
+  }
+}
