@@ -1,4 +1,8 @@
 version: 2
+
+orbs:
+  codecov: codecov/codecov@1.0.2
+
 jobs:
   build:
     docker:
@@ -9,24 +13,13 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-            - v1-dependencies-{{ checksum "package.json" }}
-            - v1-dependencies-
-
       - run:
           name: Install npm dependencies
           command: npm ci
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
           name: Run all tests
           command: npm run test ts-configurable
 
-      - store_artifacts:
-          path: coverage
+      - codecov/upload:
+          file: coverage/
