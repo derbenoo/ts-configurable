@@ -1,7 +1,7 @@
 import { DotenvConfigOptions } from 'dotenv';
 
 /** Environment variables specific options */
-interface IEnvOptions {
+export interface IEnvOptions {
   /** Seperator for environment variables (default: '__') */
   separator?: string;
   /** Whether to lower-case environment variables (default: false) */
