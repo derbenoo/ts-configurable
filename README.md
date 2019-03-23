@@ -1,6 +1,18 @@
-<img src="https://github.com/derbenoo/ts-configurable/raw/master/ts-configurable.png" alt="ts-configurable" align="right" />
-
 # TS-Configurable
+
+---
+
+<p align="center">
+<img src="https://github.com/derbenoo/ts-configurable/raw/master/ts-configurable.svg" alt="ts-configurable" width="200" />
+</p>
+
+<div align="center">
+
+![npm](https://img.shields.io/npm/v/ts-configurable.svg?color=e535ab) ![GitHub](https://img.shields.io/github/license/derbenoo/ts-configurable.svg?color=e535ab)
+
+</div>
+
+---
 
 :sparkles: **Make all properties of a class configurable using only one decorator!** :sparkles:
 
