@@ -2,7 +2,20 @@
   "version": "0.0.2",
   "name": "ts-configurable",
   "description": "",
-  "keywords": [],
+  "keywords": [
+    "config",
+    "settings",
+    "configuration",
+    "decorator",
+    "dotenv",
+    "argument",
+    "parser",
+    "environment",
+    "variables",
+    "args",
+    "argv",
+    "env"
+  ],
   "repository": {
     "type": "git",
     "url": "git@github.com:derbenoo/ts-configurable.git"
