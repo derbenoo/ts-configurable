@@ -44,7 +44,7 @@ function getOptions(decoratorOptions: IDecoratorOptions, constructorOptions: IDe
  * @param ConfigClass Class the @Configurable() decorator was applied to
  * @param constructorValues Config values passed via the config class constructor
  */
-function getConfig<T extends { new (...args: any[]): {} }>(
+function getConfig<T extends new (...args: any[]) => {}>(
   options: IDecoratorOptions,
   ConfigClass: T,
   constructorValues: Partial<T>
@@ -116,7 +116,7 @@ function getConfig<T extends { new (...args: any[]): {} }>(
  * @param decoratorOptions Decorator options
  */
 export function Configurable(decoratorOptions: IDecoratorOptions = {}) {
-  return function<T extends { new (...args: any[]): {} }>(ConfigClass: T) {
+  return function<T extends new (...args: any[]) => {}>(ConfigClass: T) {
     // Return a new class definition where the constructor has additional functionality
     return class extends ConfigClass {
       constructor(...args: any[]) {
