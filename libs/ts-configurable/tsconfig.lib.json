@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/libs/ts-configurable",
-    "target": "es2016",
+    "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
@@ -12,8 +12,7 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "types": [],
-    "lib": ["dom", "es2018"]
+    "types": []
   },
   "typeAcquisition": {
     "enable": true
