@@ -3,7 +3,7 @@
 ---
 
 <p align="center">
-<img src="https://github.com/derbenoo/ts-configurable/raw/master/ts-configurable.svg" alt="ts-configurable" width="200" />
+<img src="https://github.com/derbenoo/ts-configurable/raw/master/ts-configurable.svg?sanitize=true" alt="ts-configurable" width="200" />
 </p>
 
 <div align="center">
