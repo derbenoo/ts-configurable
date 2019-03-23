@@ -1,5 +1,7 @@
 # TS-Configurable
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/derbenoo/ts-configurable.svg)](https://greenkeeper.io/)
+
 <p align="center">
 <img src="https://github.com/derbenoo/ts-configurable/raw/master/ts-configurable.svg?sanitize=true" alt="ts-configurable" width="250" />
 </p>
