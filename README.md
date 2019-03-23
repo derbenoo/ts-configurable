@@ -1,20 +1,18 @@
 # TS-Configurable
 
----
-
 <p align="center">
-<img src="https://github.com/derbenoo/ts-configurable/raw/master/ts-configurable.svg?sanitize=true" alt="ts-configurable" width="200" />
+<img src="https://github.com/derbenoo/ts-configurable/raw/master/ts-configurable.svg?sanitize=true" alt="ts-configurable" width="250" />
 </p>
 
 <div align="center">
 
-![npm](https://img.shields.io/npm/v/ts-configurable.svg?color=e535ab) ![GitHub](https://img.shields.io/github/license/derbenoo/ts-configurable.svg?color=e535ab)
+![npm](https://img.shields.io/npm/v/ts-configurable.svg?color=e535ab) ![GitHub](https://img.shields.io/github/license/derbenoo/ts-configurable.svg?color=e535ab) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/ts-configurable.svg?color=e535ab)
+
+:sparkles: **Make all properties of a class configurable using only one decorator!** :sparkles:
 
 </div>
 
 ---
-
-:sparkles: **Make all properties of a class configurable using only one decorator!** :sparkles:
 
 TS-Configurable implements the `@Configurable()` decorator to make any class configurable via environment variables and command line arguments! Additionally, the `BaseConfig<T>` class can be extended to allow the passing of an options (`options: Partial<T>`) object that can partially override the property defaults specified in the configuration class:
 
