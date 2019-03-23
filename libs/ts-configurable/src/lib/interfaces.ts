@@ -28,7 +28,7 @@ export interface IDecoratorOptions {
   strictTypeChecking?: boolean;
   /** Enforce that all properties are read-only by using Object.freeze() (default: true) */
   enforceReadonly?: boolean;
-  /** Apply environment variables from a file to the current process.env */
+  /** Apply environment variables from a file to the current process.env (default: true)*/
   loadEnvFromFile?: false | DotenvConfigOptions;
 }
 
