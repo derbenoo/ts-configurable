@@ -6,9 +6,9 @@
 
 <div align="center">
 
-![npm](https://img.shields.io/npm/v/ts-configurable.svg?color=e535ab) ![GitHub](https://img.shields.io/github/license/derbenoo/ts-configurable.svg?color=e535ab) ![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/ts-configurable.svg?color=e535ab)
+![npm](https://img.shields.io/npm/v/ts-configurable.svg?color=007acc) ![GitHub](https://img.shields.io/github/license/derbenoo/ts-configurable.svg?color=007acc) ![npm bundle size](https://img.shields.io/bundlephobia/min/ts-configurable.svg?color=007acc)
 
-![CircleCI (all branches)](https://img.shields.io/circleci/project/github/derbenoo/ts-configurable.svg?color=e535ab) ![Codecov](https://img.shields.io/codecov/c/gh/derbenoo/ts-configurable.svg?color=e535ab) [![Greenkeeper badge](https://badges.greenkeeper.io/derbenoo/ts-configurable.svg)](https://greenkeeper.io/)
+![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/ts-configurable.svg) ![CircleCI (all branches)](https://img.shields.io/circleci/project/github/derbenoo/ts-configurable.svg) ![Codecov](https://img.shields.io/codecov/c/gh/derbenoo/ts-configurable.svg) [![Greenkeeper badge](https://badges.greenkeeper.io/derbenoo/ts-configurable.svg)](https://greenkeeper.io/)
 
 :sparkles: **Make all properties of a class configurable using only one decorator!** :sparkles:
 
