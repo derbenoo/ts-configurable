@@ -279,6 +279,19 @@ The configuration loading hierarchy is listed below (1 = highest, 4 = lowest):
 
 This behavior is implemented using the [nconf](https://www.npmjs.com/package/nconf) package. In short, each configuration source is converted into a partially filled configuration object. All those configuration objects are then merged with the precedence order listed above. This means that individual values can be set, even for nested properties!
 
+## :rotating_light: Troubleshooting
+
+#### TypeError: Class constructor BaseConfig cannot be invoked without 'new'
+
+This error occurs when a custom class extends the `BaseConfig` class and the TypeScript compiler target is below ES6. The root cause for the issue is that the ts-configurable package is compiled with the ES6 target and an ES5 class cannot extend an ES6 class (classes are compiled to functions in ES5 while ES6 natively supports classes). Therefore, this error can be fixed by setting the compiler target to ES6 or higher:
+
+```json
+// tsconfig.json
+...
+"compilerOptions": {
+  "target": "es6"
+```
+
 ## :pray: Contributing
 
 You are welcome to contribute to the ts-configurable GitHub repository! All infos can be found here: [How to contribute](https://github.com/derbenoo/ts-configurable/blob/master/CONTRIBUTING.md)
