@@ -2,7 +2,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/libs/ts-configurable",
-    "target": "es2015",
+    "target": "es2016",
     "module": "commonjs",
     "moduleResolution": "node",
     "declaration": true,
