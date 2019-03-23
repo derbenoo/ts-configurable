@@ -25,7 +25,7 @@ export function assignValuesByTemplate(
         obj[key] = {};
         assignValuesByTemplate(obj[key], templateValue, value, options, `${parent}.${key}`);
       } else {
-        throw new Error(
+        throw new TypeError(
           `Property '${parent}.${key}' is of type object but a non-object value ('${JSON.stringify(
             value
           )}') was assigned!`
@@ -38,7 +38,7 @@ export function assignValuesByTemplate(
           Object.freeze(value);
         }
       } else {
-        throw new Error(
+        throw new TypeError(
           `Property '${parent}.${key}' is of type array but a non-array value ('${JSON.stringify(
             value
           )}') was assigned!`
@@ -49,7 +49,7 @@ export function assignValuesByTemplate(
       if (typeof value !== 'object' || value === null) {
         obj[key] = value;
       } else {
-        throw new Error(
+        throw new TypeError(
           `Property '${parent}.${key}' is of type null or undefined but a non-primitive value ('${JSON.stringify(
             value
           )}') was assigned!`
@@ -61,14 +61,14 @@ export function assignValuesByTemplate(
         if (!options.strictTypeChecking || typeof templateValue === typeof value) {
           obj[key] = value;
         } else {
-          throw new Error(
+          throw new TypeError(
             `Property '${parent}.${key}' is of type ${typeof templateValue} but a value of type ${typeof value} ('${JSON.stringify(
               value
             )}') was assigned!`
           );
         }
       } else {
-        throw new Error(
+        throw new TypeError(
           `Property '${parent}.${key}' is of type ${typeof templateValue} but a non-primitive value ('${JSON.stringify(
             value
           )}') was assigned!`

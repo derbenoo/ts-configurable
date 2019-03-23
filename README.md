@@ -19,6 +19,7 @@
 
 ---
 
+TODO: rewrite
 TS-Configurable implements the `@Configurable()` decorator to make any class configurable via environment variables and command line arguments! Additionally, the `BaseConfig<T>` class can be extended to allow the passing of an options (`options: Partial<T>`) object that can partially override the property defaults specified in the configuration class:
 
 ## :running: Get started
@@ -55,20 +56,20 @@ ServerConfig { host: '0.0.0.0', port: 3000 }
 
 # Throw an error if a value with a different type was assigned
 $ port=random ts-node server-config.ts
-Property 'ServerConfig.port' is of type number but a value of type string ('"random"') was assigned!
+TypeError: Property 'ServerConfig.port' is of type number but a value of type string ('"random"') was assigned!
 ```
 
-## :tada: Features
+## :tada: Benefits
 
 - Type safety for your configuration:
-  - No need to maintain a separate interface
+  - No need to maintain a separate TypeScript interface
   - Types can be infered from the property's default value
-  - Enforce correct types for values passed by environment variables and command line arguments
-- Take full advantage of having a configuration class:
+  - Enforce correct types for values passed by environment variables and command line arguments (`strictTypeChecking` option)
+- Take advantage of having a configuration class:
   - Calculate config values based on other config values (e.g. `url` from `host` and `port`)
   - Getter functions (e.g. `get debugPort() { return this.port + 1000; }`)
-  - Inherit from other (config) classes
-- Enforce the configuration object to be read-only
+  - Inherit from other configuration classes
+- Enforce configuration values to be read-only at compile time ([readonly modifier](https://www.typescriptlang.org/docs/handbook/classes.html#readonly-modifier)) and at runtime (`enforceReadonly` option)
 - Load environment variables from a local file (using [dotenv](https://www.npmjs.com/package/dotenv/v/6.2.0))
 
 ## :wrench: API
@@ -86,15 +87,15 @@ Class decorator for marking a class configurable: The values of all class proper
 
 The final values for the config instance's properties are calculated upon instantiation.
 
-##### options.enforceReadonly: `boolean`
+##### options.enforceReadonly: _`boolean`_
 
 Enforce that all properties are read-only by using `Object.freeze()` (default: true)
 
-##### options.loadEnvFromFile: `false` | [DotenvConfigOptions](https://www.npmjs.com/package/dotenv/v/6.2.0#options)
+##### options.loadEnvFromFile: _`false`_ | [DotenvConfigOptions](https://www.npmjs.com/package/dotenv/v/6.2.0#options)
 
 Apply environment variables from a file to the current `process.env`
 
-##### options.parseArgv: `false` | `IArgvOptions`
+##### options.parseArgv: _`false`_ | `IArgvOptions`
 
 Whether to parse command line arguments (default: true)
 
@@ -162,7 +163,7 @@ ServerConfig { host: '0.0.0.0', port: 3000 }
 
 ## :open_mouth: Nested Properties
 
-For nested configuration properties, it is recommended to define a type:
+For nested configuration properties, it is recommended to define a new type for keeping type safety:
 
 ```ts
 import { Configurable, BaseConfig } from 'ts-configurable';
@@ -193,7 +194,7 @@ const pizzaConfig = new PizzaConfig({ topping: 'bacon' });
 console.log(JSON.stringify(pizzaConfig, null, 2));
 ```
 
-Accessing nested properties is done using the `__` separator for environment variables (can be configured) and the dot notation (`.`) for command line arguments:
+Accessing nested properties is done using the `__` separator for environment variables (can be configured via `parseEnv.separator`) and the dot notation (`.`) for command line arguments:
 
 ```
 export pizza_order__delivered=false
@@ -229,17 +230,28 @@ $ start pizza-app --cash --no-paypal
 
 ## :snowflake: Readonly Properties and Object Freezing
 
-Loaded once during instantiation, recommended to be kept read-only during the entire application lifetime. Only a restart re-loads config. This way, developers can assume that config values stay constant. Example, port changes but webserver already binded to it.
-Use `readonly` to enforce during compile time with TypeScript, use `enforceReadonly` option to also enforce during runtime (using Javascript's `Object.freeze()`), resulting in a runtime error when an attempt to write a config value is catched. This is better than a "silent" write that should not have happened in the first place.
+The ts-configurable package encourages developers to keep all configuration values static during the lifetime of the application. All sources (environment variables, command line arguments, ...) are parsed and merged during the instantiation of the configuration class object. After an object has been created, the object should be considered read-only, which can be enforced using the `enforceReadonly` option. This ensures that the configuration object is not modified at runtime (using [Object.freeze](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)). Additionally, all class properties can be marked with the TypeScript `readonly` modifier to prevent assignments at compile time. This way, the developer gets instant feedback from his IDE if he accidentially tries to set a read-only configuration value.
+
+Keeping all configuration values read-only after initialization has several benefits:
+
+- The configuration object is a single source of truth, allowing all modules to have a consistent state
+- The developer is assured that multiple reads of a configuration value return the same result
+- The developer does not have to react to a configuration change (e.g., re-bind the webserver to a different port)
+
+Only a restart of the application triggers a reloading of the configuration.
 
 ## :crown: Hierarchical + Partial Object Merging
 
-Partial overriding, hierarchy of sources:
+The ability to specify configuration values using multiple sources (env vars, cmd args) necessitates the specification of a configuration source hierarchy. Each property assignment specified via one of the sources is always overriden by the same property assignment of a source higher in the loading hierarchy. The values specified via a source take precedence over all values specified in sources that are below in the loading hierarchy.
+
+The configuration loading hierarchy is listed below (1 = highest, 4 = lowest):
 
 1.  Command line arguments
 2.  Environment variables
 3.  Constructor options on instantiation
 4.  Defaults provided with the property definitions
+
+This behavior is implemented using the [nconf](https://www.npmjs.com/package/nconf) package. In short, each configuration source is converted into a partially filled configuration object. All those configuration objects are then merged with the precedence order listed above. This means that individual values can be set, even for nested properties!
 
 ## :pray: Contributing
 

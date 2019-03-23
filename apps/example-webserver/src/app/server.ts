@@ -3,7 +3,7 @@ import { ServerConfig } from './config';
 
 export class Server {
   static bootstrap() {
-    const config = new ServerConfig();
+    const config = new ServerConfig({});
     const server = http.createServer();
 
     server.listen(config.port, config.host, () => {

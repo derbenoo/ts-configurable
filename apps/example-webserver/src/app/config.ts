@@ -1,7 +1,7 @@
-import { Configurable } from '@ts-configurable';
+import { Configurable, BaseConfig } from '@ts-configurable';
 
 @Configurable()
-export class ServerConfig {
+export class ServerConfig extends BaseConfig<ServerConfig> {
   /** Host */
   host = 'localhost';
 
