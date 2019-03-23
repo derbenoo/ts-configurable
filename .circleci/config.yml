@@ -15,11 +15,18 @@ jobs:
             - v1-dependencies-{{ checksum "package.json" }}
             - v1-dependencies-
 
-      - run: npm ci
+      - run:
+          name: Install npm dependencies
+          command: npm ci
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: npm run test ts-configurable
+      - run:
+          name: Run all tests
+          command: npm run test ts-configurable
+
+      - store_artifacts:
+          path: coverage
