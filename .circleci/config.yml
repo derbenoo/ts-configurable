@@ -29,6 +29,12 @@ jobs:
           name: Run all tests
           command: npm run test ts-configurable
 
+      - store_test_results:
+          path: test-results/
+
+      - store_artifacts:
+          path: test-results/
+
       - codecov/upload:
           flags: unittests
           file: coverage/libs/ts-configurable/lcov.info

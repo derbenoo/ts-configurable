@@ -5,4 +5,5 @@
 
 # Compiled output
 coverage/
+test-results/
 dist/

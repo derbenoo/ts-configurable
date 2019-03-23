@@ -33,11 +33,13 @@ $ npm install
 ## Test Coverage
 
 ![Codecov](https://img.shields.io/codecov/c/gh/derbenoo/ts-configurable.svg)
+
 As the ts-configurable package is small in size yet its correct behavior is critical for the applications depending on it, a 100% test coverage is enforced. This means that all contributed source code needs to be tested with a 100% code coverage before being accepted into the main branch. Reasonable exceptions can be discussed and added to the Jest coverage configuration.
 
 ## Publishing to npm
 
 ![npm](https://img.shields.io/npm/v/ts-configurable.svg?color=007acc)
+
 A new version of the `ts-configurable` package can be published to npm like this:
 
 ```

@@ -10,4 +10,11 @@ module.exports = {
       statements: 100,
     },
   },
+  reporters: [
+    'default',
+    [
+      'jest-junit',
+      { suiteName: 'ts-configurable', outputDirectory: 'test-results/ts-configurable/', outputName: 'results.xml' },
+    ],
+  ],
 };

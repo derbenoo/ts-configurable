@@ -3,14 +3,16 @@
   "files.exclude": {
     "**/node_modules": true,
     "dist/": true,
-    "coverage/": true
+    "coverage/": true,
+    "test-results": true
   },
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/node_modules/**": true,
     "dist/": true,
-    "coverage/": true
+    "coverage/": true,
+    "test-results/": true
   },
   // Formatting
   "files.encoding": "utf8",
