@@ -1,0 +1,8 @@
+# Add files here to ignore them from prettier formatting
+
+# Node modules
+**/node_modules/
+
+# Compiled output
+coverage/
+dist/

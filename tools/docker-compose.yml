@@ -3,7 +3,7 @@
 # USAGE: docker-compose up -d
 ####################################################################################
 
-version: "3.2"
+version: '3.2'
 
 services:
   node-dev:
@@ -12,7 +12,7 @@ services:
     image: derbenoo/node-dev:latest
     volumes:
       - type: bind
-        source: .
+        source: ../
         target: /app/
     ports:
-      - "127.0.0.1:9229:9229" # Node debugging port
+      - '127.0.0.1:9229:9229' # Node debugging port

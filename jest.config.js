@@ -1,5 +1,10 @@
 module.exports = {
-  name: 'config',
-  preset: '../../jest.config.js',
-  coverageDirectory: '../../coverage/libs/config',
+  testMatch: ['**/+(*.)+(spec|test).+(ts|js)?(x)'],
+  transform: {
+    '^.+\\.(ts|js|html)$': 'ts-jest'
+  },
+  resolver: '@nrwl/builders/plugins/jest/resolver',
+  moduleFileExtensions: ['ts', 'js', 'html'],
+  collectCoverage: true,
+  coverageReporters: ['html']
 };

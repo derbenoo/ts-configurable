@@ -1,6 +1,6 @@
-import { Configurable } from './configurable';
-import { BaseConfig } from './base-config';
-import { IConstructorOptions } from './interfaces';
+import { BaseConfig } from '../lib/base-config';
+import { Configurable } from '../lib/configurable';
+import { IConstructorOptions } from '../lib/interfaces';
 
 describe('libs/config: BaseConfig class', () => {
   type TOrder = Partial<{

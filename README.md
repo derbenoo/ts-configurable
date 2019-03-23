@@ -47,7 +47,7 @@ Property 'ServerConfig.port' is of type number but a value of type string ('"ran
 
 - Type safety for your configuration:
   - No need to maintain a separate interface
-  - Types can be infered from the property default value
+  - Types can be infered from the property's default value
   - Enforce correct types for values passed by environment variables and command line arguments
 - Take full advantage of having a configuration class:
   - Calculate config values based on other config values (e.g. `url` from `host` and `port`)
@@ -77,7 +77,7 @@ Enforce that all properties are read-only by using `Object.freeze()` (default: t
 
 ##### `<Optional>` options.loadEnvFromFile: `false` | [DotenvConfigOptions](https://www.npmjs.com/package/dotenv#options)
 
-Apply environment variables from a file to the current process.env
+Apply environment variables from a file to the current `process.env`
 
 ##### `<Optional>` options.parseArgv: `false` | `IArgvOptions`
 
@@ -85,7 +85,7 @@ Whether to parse command line arguments (default: true)
 
 ##### `<Optional>` options.parseArgv.prefix: _`string`_
 
-Prefix for command line arguments (default: '')
+Prefix for command line arguments (default: no prefix)
 
 ##### `<Optional>` options.parseEnv: `false` | `IEnvOptions`
 
@@ -97,7 +97,7 @@ Whether to lower-case environment variables (default: false)
 
 ##### `<Optional>` options.parseEnv.prefix: _`string`_
 
-Prefix for environment variables (default: '')
+Prefix for environment variables (default: no prefix)
 
 ##### `<Optional>` options.parseEnv.separator: _`string`_
 

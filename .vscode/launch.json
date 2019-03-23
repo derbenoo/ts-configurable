@@ -4,7 +4,7 @@
     {
       "type": "node",
       "request": "attach",
-      "name": "debug node-ts-repo-template",
+      "name": "debug node",
       "port": 9229,
       "address": "localhost",
       "localRoot": "${workspaceFolder}",
