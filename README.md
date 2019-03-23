@@ -1,4 +1,4 @@
-<img src="./ts-configurable.png" alt="ts-configurable" align="right" />
+<img src="https://github.com/derbenoo/ts-configurable/raw/master/ts-configurable.png" alt="ts-configurable" align="right" />
 
 # TS-Configurable
 
