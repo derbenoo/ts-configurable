@@ -1,6 +1,6 @@
 {
   "name": "ts-configurable",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "license": "MIT",
   "scripts": {
     "cleanup": "rm -r dist/ || true ; rm -r coverage/ || true ; rm -r test-results/ || true",
