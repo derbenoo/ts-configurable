@@ -18,6 +18,14 @@ jobs:
           command: npm ci
 
       - run:
+          name: Check if all files are formatted correctly
+          command: npm run format:check
+
+      - run:
+          name: Check for linting rule violations
+          command: npm run lint
+
+      - run:
           name: Run all tests
           command: npm run test ts-configurable
 
