@@ -10,6 +10,11 @@
   "bugs": {
     "url": "https://github.com/derbenoo/ts-configurable/issues"
   },
+  "greenkeeper": {
+    "ignore": [
+      "dotenv"
+    ]
+  },
   "license": "MIT",
   "homepage": "https://github.com/derbenoo/ts-configurable",
   "main": "./index.js",

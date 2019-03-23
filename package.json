@@ -20,7 +20,11 @@
     "copy-package-json": "cp libs/ts-configurable/package.json dist/libs/ts-configurable",
     "copy-files": "run-s copy-readme copy-license copy-changelog copy-package-json"
   },
-  "private": false,
+  "greenkeeper": {
+    "ignore": [
+      "dotenv"
+    ]
+  },
   "dependencies": {
     "dotenv": "~6.2.0",
     "is-plain-object": "~2.0.4",
@@ -29,22 +33,22 @@
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
     "@angular-devkit/build-ng-packagr": "~0.13.0",
-    "@angular/cli": "7.3.1",
+    "@angular/cli": "7.3.6",
     "@angular/compiler-cli": "~7.2.0",
     "@nrwl/builders": "7.7.2",
     "@nrwl/schematics": "7.7.2",
     "@types/dotenv": "~6.1.0",
-    "@types/jest": "24.0.9",
+    "@types/jest": "24.0.11",
     "@types/nconf": "~0.10.0",
-    "@types/node": "~8.9.4",
-    "jest": "24.1.0",
+    "@types/node": "~11.11.6",
+    "jest": "24.5.0",
     "ng-packagr": "^4.2.0",
-    "prettier": "1.15.2",
+    "prettier": "1.16.4",
     "ts-jest": "24.0.0",
-    "ts-node": "~7.0.0",
+    "ts-node": "~8.0.3",
     "tsickle": ">=0.34.0",
     "tslib": "^1.9.0",
-    "tslint": "~5.11.0",
-    "typescript": "3.2.2"
+    "tslint": "~5.14.0",
+    "typescript": "3.3.4000"
   }
 }
