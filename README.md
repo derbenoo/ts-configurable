@@ -66,7 +66,7 @@ Property 'ServerConfig.port' is of type number but a value of type string ('"ran
   - Getter functions (e.g. `get debugPort() { return this.port + 1000; }`)
   - Inherit from other (config) classes
 - Enforce the configuration object to be read-only
-- Load environment variables from a local file (using [dotenv](https://www.npmjs.com/package/dotenv))
+- Load environment variables from a local file (using [dotenv](https://www.npmjs.com/package/dotenv/v/6.2.0))
 
 ## :wrench: API
 
@@ -87,7 +87,7 @@ The final values for the config instance's properties are calculated upon instan
 
 Enforce that all properties are read-only by using `Object.freeze()` (default: true)
 
-##### options.loadEnvFromFile: `false` | [DotenvConfigOptions](https://www.npmjs.com/package/dotenv#options)
+##### options.loadEnvFromFile: `false` | [DotenvConfigOptions](https://www.npmjs.com/package/dotenv/v/6.2.0#options)
 
 Apply environment variables from a file to the current `process.env`
 
@@ -156,7 +156,7 @@ console.log(JSON.stringify(pizzaConfig, null, 2));
 
 By adding the `@Configurable()` decorator to any class, all of its properties can be configured via environment variables and command line arguments:
 
-```sh
+```
 export pizza_order__delivered=false
 $ start pizza-app --order.recipient=Jonny"
 
