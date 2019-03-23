@@ -19,8 +19,9 @@
 
 ---
 
-TODO: rewrite
-TS-Configurable implements the `@Configurable()` decorator to make any class configurable via environment variables and command line arguments! Additionally, the `BaseConfig<T>` class can be extended to allow the passing of an options (`options: Partial<T>`) object that can partially override the property defaults specified in the configuration class:
+Let's be real, configuration is not sexy. We all just want to set up our project's configuration as easily as possible and then move on to build whatever we _actually_ wanted to build. But what if I told you that you can meet all your configuration needs with a single line of code and then never have to worry about it again?
+
+Simply create a class defining all configuration properties, tack on the `@Configurable()` decorator and off you go! Take advantage of type-safety, environment variable loading, command line argument parsing and much more right out-of-the-box.
 
 ## :running: Get started
 
@@ -39,7 +40,7 @@ class ServerConfig {
 console.log(new ServerConfig());
 ```
 
-Due to the `@Configurable()` decorator, the values for all properties can now be set via environment variables and command line arguments:
+Due to the `@Configurable()` decorator, the values for all properties can now be set via environment variables or command line arguments:
 
 ```sh
 # Default config instance
