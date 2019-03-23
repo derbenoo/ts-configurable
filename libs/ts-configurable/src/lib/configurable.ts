@@ -17,9 +17,9 @@ import { BaseConfig } from './base-config';
  */
 function getOptions(decoratorOptions: IDecoratorOptions, constructorOptions: IDecoratorOptions): IDecoratorOptions {
   const defaultOptions: IDecoratorOptions = {
-    parseArgv: false,
-    parseEnv: false,
-    loadEnvFromFile: false,
+    parseArgv: { prefix: '' },
+    parseEnv: { prefix: '', separator: '__', lowerCase: false },
+    loadEnvFromFile: {},
     parseValues: true,
     strictTypeChecking: true,
     enforceReadonly: true,
