@@ -14,15 +14,14 @@
           "options": {
             "outputPath": "dist/libs/ts-configurable",
             "main": "libs/ts-configurable/src/index.ts",
-            "tsConfig": "libs/ts-configurable/tsconfig.lib.json",
-            "project": "libs/ts-configurable/ng-package.json"
+            "tsConfig": "libs/ts-configurable/tsconfig.lib.json"
           },
           "configurations": {
             "production": {
               "optimization": true,
               "extractLicenses": true,
               "inspect": false,
-              "externalDependencies": "none"
+              "externalDependencies": "all"
             }
           }
         },

@@ -6,7 +6,7 @@
     "cleanup": "rm -r dist/ || true; rm -r coverage/ || true",
     "start": "ng serve",
     "build": "ng build",
-    "prepack": "run-s build copy-files",
+    "pack-lib": "npm run cleanup && tsc --build libs/ts-configurable/tsconfig.lib.json && npm run copy-files",
     "test": "ng test",
     "lint": "./node_modules/.bin/nx lint && ng lint",
     "format": "./node_modules/.bin/nx format:write",
