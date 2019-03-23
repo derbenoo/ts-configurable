@@ -1,17 +1,20 @@
 # TS-Configurable
 
 <p align="center">
+<a href="https://www.npmjs.com/package/ts-configurable">
 <img src="https://github.com/derbenoo/ts-configurable/raw/master/ts-configurable.svg?sanitize=true" alt="ts-configurable" width="250" />
+</a>
 </p>
 
 <div align="center">
+<p align="center">
 
 [![npm](https://img.shields.io/npm/v/ts-configurable.svg?color=007acc)](https://www.npmjs.com/package/ts-configurable) [![GitHub](https://img.shields.io/github/license/derbenoo/ts-configurable.svg?color=007acc)](https://github.com/derbenoo/ts-configurable/blob/master/LICENSE) [![npm bundle size](https://img.shields.io/bundlephobia/min/ts-configurable.svg?color=007acc)](https://www.npmjs.com/package/ts-configurable)
-
 [![Snyk Vulnerabilities for npm package](https://img.shields.io/snyk/vulnerabilities/npm/ts-configurable.svg)](https://snyk.io/test/npm/ts-configurable) [![CircleCI (all branches)](https://img.shields.io/circleci/project/github/derbenoo/ts-configurable.svg)](https://circleci.com/gh/derbenoo/ts-configurable) [![Codecov](https://img.shields.io/codecov/c/gh/derbenoo/ts-configurable.svg)](https://codecov.io/gh/derbenoo/ts-configurable) [![Greenkeeper badge](https://badges.greenkeeper.io/derbenoo/ts-configurable.svg)](https://github.com/derbenoo/ts-configurable/blob/master/package.json)
 
 :sparkles: **Make all properties of a class configurable using only one decorator!** :sparkles:
 
+</p>
 </div>
 
 ---
@@ -123,10 +126,46 @@ Attempt to parse well-known values (e.g. 'false', 'null', 'undefined' and JSON v
 
 Throw an error if a config entry is set to a value of a different type than the default value (e.g. assigning a number to a string property) (default: true)
 
-## Example: Nested Properties
+## :ok_hand: Provide Options and Defaults via the Constructor
+
+By extending the `BaseConfig` class, both the options passed to the `@Configurable()` decorator as well as the default values assigned to the instance properties can be overriden via the constructor during instantiation:
 
 ```ts
-import { Configurable, BaseConfig } from '@tfs/config';
+// server-config.ts
+import { Configurable, BaseConfig } from 'ts-configurable';
+
+@Configurable({ parseEnv: { prefix: '' } })
+class ServerConfig extends BaseConfig<ServerConfig> {
+  host = 'localhost';
+  port = 3000;
+}
+
+const config = new ServerConfig({
+  options: {
+    parseEnv: false,
+  },
+  config: {
+    host: '0.0.0.0',
+  },
+});
+
+console.log(config);
+```
+
+While activating the parsing of environment variables inside the decorator options, we override this setting again in the constructor provided options and set it to `false`, therefore disabling any environment variable parsing. Additionally, we override the default value for the `host` property from `localhost` to `0.0.0.0` inside the constructor as well:
+
+```sh
+# Ignore env variable "port", override host variable via constructor
+$ port=4200 ts-node server-config.ts
+ServerConfig { host: '0.0.0.0', port: 3000 }
+```
+
+## :open_mouth: Nested Properties
+
+For nested configuration properties, it is recommended to define a type:
+
+```ts
+import { Configurable, BaseConfig } from 'ts-configurable';
 
 type TOrder = Partial<{
   recipient: string;
@@ -154,7 +193,7 @@ const pizzaConfig = new PizzaConfig({ topping: 'bacon' });
 console.log(JSON.stringify(pizzaConfig, null, 2));
 ```
 
-By adding the `@Configurable()` decorator to any class, all of its properties can be configured via environment variables and command line arguments:
+Accessing nested properties is done using the `__` separator for environment variables (can be configured) and the dot notation (`.`) for command line arguments:
 
 ```
 export pizza_order__delivered=false
@@ -179,9 +218,7 @@ $ start pizza-app --order.recipient=Jonny"
 }
 ```
 
-## Provide options and config values via constructor
-
-## Negating Boolean Arguments
+## :grey_exclamation: Negating Boolean Arguments
 
 If you want to explicitly set a field to `false` instead of just leaving it `undefined` or to override a default you can add a `no-` before the key: `--no-key`.
 
@@ -190,8 +227,20 @@ $ start pizza-app --cash --no-paypal
 { cash: true, paypal: false }
 ```
 
-## Hierarchical atomic object merging
+## :snowflake: Readonly Properties and Object Freezing
 
-## Contributing
+Loaded once during instantiation, recommended to be kept read-only during the entire application lifetime. Only a restart re-loads config. This way, developers can assume that config values stay constant. Example, port changes but webserver already binded to it.
+Use `readonly` to enforce during compile time with TypeScript, use `enforceReadonly` option to also enforce during runtime (using Javascript's `Object.freeze()`), resulting in a runtime error when an attempt to write a config value is catched. This is better than a "silent" write that should not have happened in the first place.
+
+## :crown: Hierarchical + Partial Object Merging
+
+Partial overriding, hierarchy of sources:
+
+1.  Command line arguments
+2.  Environment variables
+3.  Constructor options on instantiation
+4.  Defaults provided with the property definitions
+
+## :pray: Contributing
 
 You are welcome to contribute to the ts-configurable GitHub repository! All infos can be found here: [How to contribute](https://github.com/derbenoo/ts-configurable/blob/master/CONTRIBUTING.md)
