@@ -256,7 +256,7 @@ $ ts-node pay-pizza.ts --cash --no-paypal
 
 ## :snowflake: Readonly Properties and Object Freezing
 
-The ts-configurable package encourages developers to keep all configuration values static during the lifetime of the application. All sources (environment variables, command line arguments, ...) are parsed and merged during the instantiation of the configuration class object. After an object has been created, the object should be considered read-only, which can be enforced using the `enforceReadonly` option. This ensures that the configuration object is not modified at runtime (using [Object.freeze](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)). Additionally, all class properties can be marked with the TypeScript `readonly` modifier to prevent assignments at compile time. This way, the developer gets instant feedback from his IDE if he accidentially tries to set a read-only configuration value.
+The ts-configurable package encourages developers to keep all configuration values static throughout the lifetime of the application. All sources (environment variables, command line arguments, ...) are parsed and merged during the instantiation of the configuration class object. After an object has been created, the object should be considered read-only, which can be enforced using the `enforceReadonly` option. This ensures that the configuration object is not modified at runtime (using [Object.freeze](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze)). Additionally, all class properties can be marked with the TypeScript `readonly` modifier to prevent assignments at compile time. This way, the developer gets instant feedback from his IDE if he accidentially tries to set a read-only configuration value.
 
 Keeping all configuration values read-only after initialization has several benefits:
 
@@ -283,7 +283,7 @@ This behavior is implemented using the [nconf](https://www.npmjs.com/package/nco
 
 #### TypeError: Class constructor BaseConfig cannot be invoked without 'new'
 
-This error occurs when a custom class extends the `BaseConfig` class and the TypeScript compiler target is below ES6. The root cause for the issue is that the ts-configurable package is compiled with the ES6 target and an ES5 class cannot extend an ES6 class (classes are compiled to functions in ES5 while ES6 natively supports classes). Therefore, this error can be fixed by setting the compiler target to ES6 or higher:
+This error occurs when a custom class extends the `BaseConfig` class and the TypeScript compiler target is below ES6. The root cause for this issue is that the ts-configurable package is compiled with the ES6 target and an ES5 class cannot extend an ES6 class (classes are compiled to functions in ES5 while ES6 natively supports classes). Therefore, this error can be fixed by setting the compiler target to ES6 or higher:
 
 ```json
 // tsconfig.json

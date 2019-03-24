@@ -85,6 +85,51 @@
           }
         }
       }
+    },
+    "example-nestjs": {
+      "root": "apps/example-nestjs",
+      "sourceRoot": "apps/example-nestjs/src",
+      "projectType": "application",
+      "prefix": "example-nestjs",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/builders:node-build",
+          "options": {
+            "outputPath": "dist/apps/example-nestjs",
+            "main": "apps/example-nestjs/src/main.ts",
+            "tsConfig": "apps/example-nestjs/tsconfig.app.json"
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "externalDependencies": "none"
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/builders:node-execute",
+          "options": {
+            "buildTarget": "example-nestjs:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["apps/example-nestjs/tsconfig.app.json", "apps/example-nestjs/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "apps/example-nestjs/jest.config.js",
+            "tsConfig": "apps/example-nestjs/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {

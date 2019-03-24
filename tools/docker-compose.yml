@@ -15,4 +15,5 @@ services:
         source: ../
         target: /app/
     ports:
+      - '127.0.0.1:3000:3000' # HTTP port
       - '127.0.0.1:9229:9229' # Node debugging port

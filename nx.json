@@ -12,7 +12,12 @@
       "tags": []
     },
     "example-webserver": {
-      "tags": ["example"]
+      "tags": [
+        "example"
+      ]
+    },
+    "example-nestjs": {
+      "tags": []
     }
   }
 }
