@@ -294,6 +294,8 @@ This error occurs when a custom class extends the `BaseConfig` class and the Typ
 
 ## :books: Examples
 
+Here are some example applications showcasing how to use the ts-configurable package:
+
 - [Minimal webserver](https://github.com/derbenoo/ts-configurable/tree/master/apps/example-webserver)
 - [NestJS webserver](https://github.com/derbenoo/ts-configurable/tree/master/apps/example-nestjs)
 

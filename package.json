@@ -1,6 +1,6 @@
 {
   "name": "ts-configurable",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "license": "MIT",
   "scripts": {
     "cleanup": "rm -r dist/ || true ; rm -r coverage/ || true ; rm -r test-results/ || true",
@@ -26,19 +26,22 @@
     ]
   },
   "dependencies": {
+    "@nestjs/common": "~6.0.0",
+    "@nestjs/core": "~6.0.0",
+    "@nestjs/platform-express": "~6.0.2",
+    "@nestjs/schematics": "~6.0.0",
+    "@nestjs/testing": "~6.0.0",
+    "@nestjs/typeorm": "~6.0.0",
     "dotenv": "~6.2.0",
-    "nconf": "~0.10.0"
+    "nconf": "~0.10.0",
+    "sqlite3": "~4.0.6",
+    "typeorm": "~0.2.15"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.13.0",
     "@angular-devkit/build-ng-packagr": "~0.13.0",
     "@angular/cli": "7.3.6",
     "@angular/compiler-cli": "~7.2.0",
-    "@nestjs/common": "~6.0.0",
-    "@nestjs/core": "~6.0.0",
-    "@nestjs/platform-express": "~6.0.2",
-    "@nestjs/schematics": "~6.0.0",
-    "@nestjs/testing": "~6.0.0",
     "@nrwl/builders": "7.7.2",
     "@nrwl/schematics": "7.7.2",
     "@types/dotenv": "~6.1.0",
