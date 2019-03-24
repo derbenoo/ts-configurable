@@ -1,5 +1,12 @@
-import * as isPlainObject from 'is-plain-object'; // https://www.npmjs.com/package/is-plain-object
 import { IDecoratorOptions } from './interfaces';
+
+/**
+ * Check whether a given value is a Javascript object
+ * @param val value to check
+ */
+export function isObject(val: any): boolean {
+  return val !== null && val !== undefined && typeof val === 'object' && Array.isArray(val) === false;
+}
 
 /**
  * Assign values to an object based on a template object's properties and their respective types
@@ -19,9 +26,8 @@ export function assignValuesByTemplate(
   Object.keys(template).forEach(key => {
     const templateValue = template[key];
     const value = config[key];
-
-    if (isPlainObject(templateValue)) {
-      if (isPlainObject(value)) {
+    if (isObject(templateValue)) {
+      if (isObject(value)) {
         obj[key] = {};
         assignValuesByTemplate(obj[key], templateValue, value, options, `${parent}.${key}`);
       } else {

@@ -35,7 +35,6 @@
   "author": "Benjamin Assadsolimani (derbenoo)",
   "dependencies": {
     "dotenv": "~6.2.0",
-    "is-plain-object": "~2.0.4",
     "nconf": "~0.10.0"
   }
 }

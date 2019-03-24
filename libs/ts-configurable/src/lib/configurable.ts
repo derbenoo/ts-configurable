@@ -1,8 +1,7 @@
 import * as dotenv from 'dotenv'; // https://www.npmjs.com/package/dotenv
-import * as isPlainObject from 'is-plain-object'; // https://www.npmjs.com/package/is-plain-object
 import { Provider } from 'nconf'; // https://www.npmjs.com/package/nconf
 import { IDecoratorOptions, IConstructorOptions } from './interfaces';
-import { assignValuesByTemplate } from './util';
+import { assignValuesByTemplate, isObject } from './util';
 import { BaseConfig } from './base-config';
 
 /**
@@ -125,7 +124,7 @@ export function Configurable(decoratorOptions: IDecoratorOptions = {}) {
 
         // Parse options provided by the constructor (first argument) if the BaseConfig class was extended, ignore otherwise
         const constructorOptions: IConstructorOptions<T> =
-          new ConfigClass() instanceof BaseConfig && isPlainObject(args[0]) ? args[0] : {};
+          new ConfigClass() instanceof BaseConfig && isObject(args[0]) ? args[0] : {};
 
         const options = getOptions(decoratorOptions, constructorOptions.options);
 

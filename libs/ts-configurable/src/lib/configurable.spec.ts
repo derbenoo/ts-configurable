@@ -326,4 +326,28 @@ describe('libs/config: @Configurable() decorator', () => {
     expect(config.id).toBe(2);
     expect(config.order.delivered).toBe(false);
   });
+
+  it('Detect properties that are configuration class themselves correctly as type "object" ', () => {
+    class OrderConfig {
+      delivered = false;
+    }
+
+    @Configurable()
+    class PizzaConfig {
+      id = 1;
+      order = new OrderConfig();
+    }
+
+    expect(() => {
+      const _ = new PizzaConfig();
+    }).not.toThrow();
+
+    const config = new PizzaConfig();
+    expect(config).toEqual({
+      id: 1,
+      order: {
+        delivered: false,
+      },
+    });
+  });
 });
