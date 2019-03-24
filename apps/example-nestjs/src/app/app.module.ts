@@ -1,10 +1,24 @@
-import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { LoggerService } from './logger.service';
+import { Module, DynamicModule } from '@nestjs/common';
+import { ConfigController } from './config/config.controller';
+import { LoggerService } from './logging/logger.service';
 import { ConfigService } from './config/config.service';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
-  controllers: [AppController],
-  providers: [LoggerService, ConfigService],
+  controllers: [ConfigController],
+  providers: [LoggerService],
 })
-export class AppModule {}
+export class AppModule {
+  static forRoot(config: ConfigService): DynamicModule {
+    return {
+      imports: [DatabaseModule.forRoot(config)],
+      module: AppModule,
+      providers: [
+        {
+          provide: ConfigService,
+          useValue: config,
+        },
+      ],
+    };
+  }
+}
