@@ -292,6 +292,11 @@ This error occurs when a custom class extends the `BaseConfig` class and the Typ
   "target": "es6"
 ```
 
+## :books: Examples
+
+- [Minimal webserver](apps/example-webserver/README.md)
+- [NestJS webserver](apps/example-nestjs/README.md)
+
 ## :pray: Contributing
 
 You are welcome to contribute to the ts-configurable GitHub repository! All infos can be found here: [How to contribute](https://github.com/derbenoo/ts-configurable/blob/master/CONTRIBUTING.md)
