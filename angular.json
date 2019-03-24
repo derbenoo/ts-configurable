@@ -112,7 +112,9 @@
         "serve": {
           "builder": "@nrwl/builders:node-execute",
           "options": {
-            "buildTarget": "example-nestjs:build"
+            "buildTarget": "example-nestjs:build",
+            "inspect": true,
+            "port": 9229
           }
         },
         "lint": {
