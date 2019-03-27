@@ -4,6 +4,8 @@
 
 [NestJS](https://docs.nestjs.com/) is a framework for building efficient, scalable Node.js server-side applications. As it is fully written in TypeScript and provides an easy way to pass around a single instance of a class using dependecy injection, it is naturally a good match for the ts-configurable package. This example includes a NestJS webserver with a configuration service build with the ts-configurable package, a database connection module as well as a logging service.
 
+![](example-nestjs.gif)
+
 ## Get Started
 
 The instructions on how to spin up a development environment can be found here: [Development Setup](../../CONTRIBUTING.md).
