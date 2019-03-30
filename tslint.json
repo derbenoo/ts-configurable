@@ -1,4 +1,5 @@
 {
+  "extends": ["tslint-no-focused-test"],
   "rulesDirectory": ["node_modules/@nrwl/schematics/src/tslint"],
   "rules": {
     "arrow-return-shorthand": true,
@@ -14,12 +15,7 @@
     "member-ordering": [
       true,
       {
-        "order": [
-          "static-field",
-          "instance-field",
-          "static-method",
-          "instance-method"
-        ]
+        "order": ["static-field", "instance-field", "static-method", "instance-method"]
       }
     ],
     "no-arg": true,
@@ -31,6 +27,7 @@
     "no-empty": false,
     "no-empty-interface": true,
     "no-eval": true,
+    "no-focused-test": true,
     "no-inferrable-types": [true, "ignore-params"],
     "no-misused-new": true,
     "no-non-null-assertion": true,
@@ -48,14 +45,19 @@
     "triple-equals": [true, "allow-null-check"],
     "unified-signatures": true,
     "variable-name": false,
+    "ordered-imports": {
+      "options": {
+        "import-sources-order": "case-insensitive",
+        "module-source-path": "full",
+        "named-imports-order": "case-insensitive"
+      }
+    },
 
     "nx-enforce-module-boundaries": [
       true,
       {
         "allow": [],
-        "depConstraints": [
-          { "sourceTag": "*", "onlyDependOnLibsWithTags": ["*"] }
-        ]
+        "depConstraints": [{ "sourceTag": "*", "onlyDependOnLibsWithTags": ["*"] }]
       }
     ]
   }

@@ -1,6 +1,6 @@
-import * as path from 'path';
-import * as os from 'os';
 import * as fs from 'fs';
+import * as os from 'os';
+import * as path from 'path';
 import { Configurable } from './configurable';
 
 /**
@@ -305,7 +305,10 @@ describe('libs/config: @Configurable() decorator', () => {
   it('Load environment variables from file', () => {
     // Create temporary environment variables file
     const envFilepath = path.join(os.tmpdir(), '.env');
-    fs.writeFileSync(envFilepath, 'spec_configurable_h_id=2\nspec_configurable_h_order__delivered=false');
+    fs.writeFileSync(
+      envFilepath,
+      'spec_configurable_h_id=2\nspec_configurable_h_order__delivered=false'
+    );
 
     @Configurable({
       strictTypeChecking: true,

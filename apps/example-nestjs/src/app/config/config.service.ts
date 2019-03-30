@@ -1,8 +1,8 @@
-import { Configurable, BaseConfig } from '@ts-configurable';
 import { Injectable } from '@nestjs/common';
-import { WebConfig } from './web-config';
-import { LoggingConfig } from '../logging/logging-config';
+import { BaseConfig, Configurable } from '@ts-configurable';
 import { DatabaseConfig } from '../database/database-config';
+import { LoggingConfig } from '../logging/logging-config';
+import { WebConfig } from './web-config';
 
 @Injectable()
 @Configurable()

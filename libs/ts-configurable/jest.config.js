@@ -14,7 +14,11 @@ module.exports = {
     'default',
     [
       'jest-junit',
-      { suiteName: 'ts-configurable', outputDirectory: 'test-results/ts-configurable/', outputName: 'results.xml' },
+      {
+        suiteName: 'ts-configurable',
+        outputDirectory: 'test-results/ts-configurable/',
+        outputName: 'results.xml',
+      },
     ],
   ],
 };

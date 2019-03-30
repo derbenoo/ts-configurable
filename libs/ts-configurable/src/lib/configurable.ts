@@ -1,8 +1,8 @@
 import * as dotenv from 'dotenv'; // https://www.npmjs.com/package/dotenv
 import { Provider } from 'nconf'; // https://www.npmjs.com/package/nconf
-import { IDecoratorOptions, IConstructorOptions } from './interfaces';
-import { assignValuesByTemplate, isObject } from './util';
 import { BaseConfig } from './base-config';
+import { IConstructorOptions, IDecoratorOptions } from './interfaces';
+import { assignValuesByTemplate, isObject } from './util';
 
 /**
  * Get the final options object containing all options for the @Configurable() decorator.
@@ -14,7 +14,10 @@ import { BaseConfig } from './base-config';
  * @param decoratorOptions options passed via the @Configurable() decorator
  * @param constructorOptions options passed via the config classes constructor
  */
-function getOptions(decoratorOptions: IDecoratorOptions, constructorOptions: IDecoratorOptions): IDecoratorOptions {
+function getOptions(
+  decoratorOptions: IDecoratorOptions,
+  constructorOptions: IDecoratorOptions
+): IDecoratorOptions {
   const defaultOptions: IDecoratorOptions = {
     parseArgv: { prefix: '' },
     parseEnv: { prefix: '', separator: '__', lowerCase: false },

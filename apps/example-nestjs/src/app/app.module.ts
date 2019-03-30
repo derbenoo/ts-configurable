@@ -1,8 +1,8 @@
-import { Module, DynamicModule } from '@nestjs/common';
+import { DynamicModule, Module } from '@nestjs/common';
 import { ConfigController } from './config/config.controller';
-import { LoggerService } from './logging/logger.service';
 import { ConfigService } from './config/config.service';
 import { DatabaseModule } from './database/database.module';
+import { LoggerService } from './logging/logger.service';
 
 @Module({
   controllers: [ConfigController],

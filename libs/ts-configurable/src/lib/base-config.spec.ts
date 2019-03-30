@@ -1,5 +1,5 @@
-import { Configurable } from './configurable';
 import { BaseConfig } from './base-config';
+import { Configurable } from './configurable';
 import { IConstructorOptions } from './interfaces';
 
 describe('libs/config: BaseConfig class', () => {

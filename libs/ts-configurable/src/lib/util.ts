@@ -5,7 +5,9 @@ import { IDecoratorOptions } from './interfaces';
  * @param val value to check
  */
 export function isObject(val: any): boolean {
-  return val !== null && val !== undefined && typeof val === 'object' && Array.isArray(val) === false;
+  return (
+    val !== null && val !== undefined && typeof val === 'object' && Array.isArray(val) === false
+  );
 }
 
 /**
