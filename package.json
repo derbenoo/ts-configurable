@@ -42,7 +42,7 @@
     "@angular-devkit/build-ng-packagr": "~0.13.0",
     "@angular/cli": "7.3.7",
     "@angular/compiler-cli": "~7.2.0",
-    "@nrwl/builders": "7.8.1",
+    "@nrwl/builders": "7.8.2",
     "@nrwl/schematics": "7.8.1",
     "@types/dotenv": "~6.1.0",
     "@types/jest": "24.0.11",
