@@ -178,10 +178,11 @@ describe('libs/config: @Configurable() decorator', () => {
     }).toThrow();
   });
 
-  it('Throw an error when overriding non-primitive properties with primitive ones or vice vesa', () => {
+  it('Throw an error when overriding non-primitive properties with primitive ones or vice versa on strictObjectStructureChecking=true', () => {
     // Override non-primitive property with primitive type
     @Configurable({
       strictTypeChecking: false,
+      strictObjectStructureChecking: true,
       parseEnv: {
         separator: '__',
         lowerCase: false,
@@ -199,6 +200,7 @@ describe('libs/config: @Configurable() decorator', () => {
     // Override primitive property with non-primitive type
     @Configurable({
       strictTypeChecking: false,
+      strictObjectStructureChecking: true,
       parseEnv: {
         separator: '__',
         lowerCase: false,
@@ -216,6 +218,7 @@ describe('libs/config: @Configurable() decorator', () => {
     // Override array property with non-array type
     @Configurable({
       strictTypeChecking: false,
+      strictObjectStructureChecking: true,
       parseEnv: {
         separator: '__',
         lowerCase: false,
@@ -233,6 +236,7 @@ describe('libs/config: @Configurable() decorator', () => {
     // Override null property with non-primitve type
     @Configurable({
       strictTypeChecking: false,
+      strictObjectStructureChecking: true,
       parseEnv: {
         separator: '__',
         lowerCase: false,
@@ -246,6 +250,80 @@ describe('libs/config: @Configurable() decorator', () => {
       process.env.spec_configurable_g_rating = '["excellent", "just ok"]';
       const config = new PizzaConfig4();
     }).toThrow();
+  });
+
+  it('Do not throw an error when overriding non-primitive properties with primitive ones or vice versa on strictObjectStructureChecking=false', () => {
+    // Override non-primitive property with primitive type
+    @Configurable({
+      strictTypeChecking: false,
+      strictObjectStructureChecking: false,
+      parseEnv: {
+        separator: '__',
+        lowerCase: false,
+        prefix: 'spec_configurable_d_',
+      },
+      parseValues: true,
+    })
+    class PizzaConfig extends BasePizzaConfig {}
+
+    expect(() => {
+      process.env.spec_configurable_d_order = 'One pizza margherita please.';
+      const config = new PizzaConfig();
+    }).not.toThrow();
+
+    // Override primitive property with non-primitive type
+    @Configurable({
+      strictTypeChecking: false,
+      strictObjectStructureChecking: false,
+      parseEnv: {
+        separator: '__',
+        lowerCase: false,
+        prefix: 'spec_configurable_e_',
+      },
+      parseValues: true,
+    })
+    class PizzaConfig2 extends BasePizzaConfig {}
+
+    expect(() => {
+      process.env.spec_configurable_e_topping = '["bacon", "eggs"]';
+      const config = new PizzaConfig2();
+    }).not.toThrow();
+
+    // Override array property with non-array type
+    @Configurable({
+      strictTypeChecking: false,
+      strictObjectStructureChecking: false,
+      parseEnv: {
+        separator: '__',
+        lowerCase: false,
+        prefix: 'spec_configurable_f_',
+      },
+      parseValues: true,
+    })
+    class PizzaConfig3 extends BasePizzaConfig {}
+
+    expect(() => {
+      process.env.spec_configurable_f_ingredients = 'oil and bread and cheese';
+      const config = new PizzaConfig3();
+    }).not.toThrow();
+
+    // Override null property with non-primitve type
+    @Configurable({
+      strictTypeChecking: false,
+      strictObjectStructureChecking: false,
+      parseEnv: {
+        separator: '__',
+        lowerCase: false,
+        prefix: 'spec_configurable_g_',
+      },
+      parseValues: true,
+    })
+    class PizzaConfig4 extends BasePizzaConfig {}
+
+    expect(() => {
+      process.env.spec_configurable_g_rating = '["excellent", "just ok"]';
+      const config = new PizzaConfig4();
+    }).not.toThrow();
   });
 
   it('Command line arguments are parsed & applied', () => {

@@ -24,6 +24,7 @@ function getOptions(
     loadEnvFromFile: {},
     parseValues: true,
     strictTypeChecking: true,
+    strictObjectStructureChecking: true,
     enforceReadonly: true,
   };
 

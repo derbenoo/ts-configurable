@@ -26,6 +26,8 @@ export interface IDecoratorOptions {
   parseValues?: boolean;
   /** Throw an error if a config entry is set to a value of a different type than the default value (e.g. assigning a number to a string property) (default: true) */
   strictTypeChecking?: boolean;
+  /** Throw an error if a config entry is set to a value of a different structure than the default value (e.g., assigning an object to a primitive property) (default: true) */
+  strictObjectStructureChecking?: boolean;
   /** Enforce that all properties are read-only by using Object.freeze() (default: true) */
   enforceReadonly?: boolean;
   /** Apply environment variables from a file to the current process.env (default: true)*/

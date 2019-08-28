@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.0
+
+- Add the `strictObjectStructureChecking` option
+
 ## 0.1.1
 
 - Bugfix: remove the "is-plain-object" dependency and replace it with a simple object check as class instances should be treated as objects as well but are not "plain" objects

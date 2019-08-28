@@ -28,10 +28,13 @@ export function assignValuesByTemplate(
   Object.keys(template).forEach(key => {
     const templateValue = template[key];
     const value = config[key];
+
     if (isObject(templateValue)) {
       if (isObject(value)) {
         obj[key] = {};
         assignValuesByTemplate(obj[key], templateValue, value, options, `${parent}.${key}`);
+      } else if (!options.strictObjectStructureChecking) {
+        obj[key] = value;
       } else {
         throw new TypeError(
           `Property '${parent}.${key}' is of type object but a non-object value ('${JSON.stringify(
@@ -45,6 +48,8 @@ export function assignValuesByTemplate(
         if (options.enforceReadonly) {
           Object.freeze(value);
         }
+      } else if (!options.strictObjectStructureChecking) {
+        obj[key] = value;
       } else {
         throw new TypeError(
           `Property '${parent}.${key}' is of type array but a non-array value ('${JSON.stringify(
@@ -55,6 +60,8 @@ export function assignValuesByTemplate(
     } else if (templateValue === null || templateValue === undefined) {
       // No type given by template property -> all primitive types are allowed
       if (typeof value !== 'object' || value === null) {
+        obj[key] = value;
+      } else if (!options.strictObjectStructureChecking) {
         obj[key] = value;
       } else {
         throw new TypeError(
@@ -68,6 +75,8 @@ export function assignValuesByTemplate(
       if (typeof value !== 'object' || value === null) {
         if (!options.strictTypeChecking || typeof templateValue === typeof value) {
           obj[key] = value;
+        } else if (!options.strictObjectStructureChecking) {
+          obj[key] = value;
         } else {
           throw new TypeError(
             `Property '${parent}.${key}' is of type ${typeof templateValue} but a value of type ${typeof value} ('${JSON.stringify(
@@ -75,6 +84,8 @@ export function assignValuesByTemplate(
             )}') was assigned!`
           );
         }
+      } else if (!options.strictObjectStructureChecking) {
+        obj[key] = value;
       } else {
         throw new TypeError(
           `Property '${parent}.${key}' is of type ${typeof templateValue} but a non-primitive value ('${JSON.stringify(

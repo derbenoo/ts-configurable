@@ -128,6 +128,10 @@ Attempt to parse well-known values (e.g. 'false', 'null', 'undefined' and JSON v
 
 Throw an error if a config entry is set to a value of a different type than the default value (e.g. assigning a number to a string property) (default: true)
 
+##### options.strictObjectStructureChecking: _`boolean`_
+
+Throw an error if a config entry is set to a value of a different structure than the default value (e.g., assigning an object to a primitive property) (default: true)
+
 ## :ok_hand: Provide Options and Defaults via the Constructor
 
 By extending the `BaseConfig` class, both the options passed to the `@Configurable()` decorator as well as the default values assigned to the instance properties can be overriden via the constructor during instantiation:

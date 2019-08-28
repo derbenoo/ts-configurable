@@ -5,7 +5,14 @@ import { LoggerService } from './app/logging/logger.service';
 
 async function bootstrap() {
   // Instantiate config service
-  const config = new ConfigService();
+  const config = new ConfigService({
+    config: {
+      web: {
+        port: 3000,
+        protocol: 'https',
+      },
+    },
+  });
 
   const app = await NestFactory.create(AppModule.forRoot(config), {});
 

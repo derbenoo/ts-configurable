@@ -9,7 +9,7 @@ import { WebConfig } from './web-config';
 /** Service providing configuration values */
 export class ConfigService extends BaseConfig<ConfigService> {
   /** Webserver configuration */
-  readonly web = new WebConfig();
+  readonly web: Partial<WebConfig> = new WebConfig();
 
   /** Logging configuration */
   readonly log = new LoggingConfig();
