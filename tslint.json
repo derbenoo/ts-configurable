@@ -1,6 +1,6 @@
 {
   "extends": ["tslint-no-focused-test"],
-  "rulesDirectory": ["node_modules/@nrwl/schematics/src/tslint"],
+  "rulesDirectory": ["node_modules/@nrwl/workspace/src/tslint"],
   "rules": {
     "arrow-return-shorthand": true,
     "callable-types": true,
@@ -52,12 +52,16 @@
         "named-imports-order": "case-insensitive"
       }
     },
-
     "nx-enforce-module-boundaries": [
       true,
       {
         "allow": [],
-        "depConstraints": [{ "sourceTag": "*", "onlyDependOnLibsWithTags": ["*"] }]
+        "depConstraints": [
+          {
+            "sourceTag": "*",
+            "onlyDependOnLibsWithTags": ["*"]
+          }
+        ]
       }
     ]
   }

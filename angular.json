@@ -10,7 +10,7 @@
       "prefix": "ts-configurable",
       "architect": {
         "build": {
-          "builder": "@nrwl/builders:node-build",
+          "builder": "@nrwl/node:build",
           "options": {
             "outputPath": "dist/libs/ts-configurable",
             "main": "libs/ts-configurable/src/index.ts",
@@ -28,12 +28,15 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/ts-configurable/tsconfig.lib.json", "libs/ts-configurable/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/ts-configurable/tsconfig.lib.json",
+              "libs/ts-configurable/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
-          "builder": "@nrwl/builders:jest",
+          "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "libs/ts-configurable/jest.config.js",
             "tsConfig": "libs/ts-configurable/tsconfig.spec.json",
@@ -56,7 +59,7 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@nrwl/builders:node-build",
+          "builder": "@nrwl/node:build",
           "options": {
             "outputPath": "dist/apps/example-webserver",
             "main": "apps/example-webserver/src/main.ts",
@@ -72,7 +75,7 @@
           }
         },
         "serve": {
-          "builder": "@nrwl/builders:node-execute",
+          "builder": "@nrwl/node:execute",
           "options": {
             "buildTarget": "example-webserver:build"
           }
@@ -94,7 +97,7 @@
       "schematics": {},
       "architect": {
         "build": {
-          "builder": "@nrwl/builders:node-build",
+          "builder": "@nrwl/node:build",
           "options": {
             "outputPath": "dist/apps/example-nestjs",
             "main": "apps/example-nestjs/src/main.ts",
@@ -110,7 +113,7 @@
           }
         },
         "serve": {
-          "builder": "@nrwl/builders:node-execute",
+          "builder": "@nrwl/node:execute",
           "options": {
             "buildTarget": "example-nestjs:build",
             "inspect": true,
@@ -120,12 +123,15 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/example-nestjs/tsconfig.app.json", "apps/example-nestjs/tsconfig.spec.json"],
+            "tsConfig": [
+              "apps/example-nestjs/tsconfig.app.json",
+              "apps/example-nestjs/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**"]
           }
         },
         "test": {
-          "builder": "@nrwl/builders:jest",
+          "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/example-nestjs/jest.config.js",
             "tsConfig": "apps/example-nestjs/tsconfig.spec.json"
@@ -139,7 +145,7 @@
       "typescriptMismatch": false,
       "versionMismatch": false
     },
-    "defaultCollection": "@nrwl/schematics"
+    "defaultCollection": "@nrwl/nest"
   },
   "schematics": {
     "@nrwl/schematics:application": {
