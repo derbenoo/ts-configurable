@@ -408,6 +408,34 @@ describe('libs/config: @Configurable() decorator', () => {
     expect(config.order.delivered).toBe(false);
   });
 
+  it('Ignore environment variables from file if loadEnvFromFile = false', () => {
+    // Create temporary environment variables file
+    const envFilepath = path.join(os.tmpdir(), '.env2');
+    fs.writeFileSync(
+      envFilepath,
+      'spec_configurable_i_id=2\nspec_configurable_i_order__delivered=false'
+    );
+
+    @Configurable({
+      strictTypeChecking: true,
+      parseEnv: {
+        separator: '__',
+        lowerCase: false,
+        prefix: 'spec_configurable_i_',
+      },
+      parseValues: true,
+      loadEnvFromFile: false,
+    })
+    class PizzaConfig extends BasePizzaConfig {}
+    const config = new PizzaConfig();
+
+    // Delete temporary environment variables file again
+    fs.unlinkSync(envFilepath);
+
+    expect(config.id).toBe(5);
+    expect(config.order.delivered).toBe(true);
+  });
+
   it('Detect properties that are configuration class themselves correctly as type "object" ', () => {
     class OrderConfig {
       delivered = false;
