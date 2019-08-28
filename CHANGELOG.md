@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.2.1
+
+- Fix wrong packing of npm package
+
 ## 0.2.0
 
 - Add the `strictObjectStructureChecking` option

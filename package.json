@@ -1,12 +1,12 @@
 {
   "name": "ts-configurable",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "license": "MIT",
   "scripts": {
     "cleanup": "rm -r dist/ || true ; rm -r coverage/ || true ; rm -r test-results/ || true",
     "start": "ng serve",
     "build": "ng build",
-    "pack:lib": "rm -r dist/libs/ts-configurable || true && tsc --build libs/ts-configurable/tsconfig.lib.json && npm run copy-files",
+    "pack:lib": "rm -r dist/libs/ts-configurable || true && tsc --build libs/ts-configurable/tsconfig.lib.json&& npm run copy-files",
     "test": "ng test",
     "lint": "./node_modules/.bin/nx lint && ng lint",
     "format": "./node_modules/.bin/nx format:write",
@@ -14,10 +14,10 @@
     "format:check": "./node_modules/.bin/nx format:check",
     "update": "ng update @nrwl/workspace",
     "update:check": "ng update",
-    "copy-readme": "cp README.md dist/libs/ts-configurable",
-    "copy-license": "cp LICENSE dist/libs/ts-configurable",
-    "copy-changelog": "cp CHANGELOG.md dist/libs/ts-configurable",
-    "copy-package-json": "cp libs/ts-configurable/package.json dist/libs/ts-configurable",
+    "copy-readme": "cp README.md dist/libs/ts-configurable/src",
+    "copy-license": "cp LICENSE dist/libs/ts-configurable/src",
+    "copy-changelog": "cp CHANGELOG.md dist/libs/ts-configurable/src",
+    "copy-package-json": "cp libs/ts-configurable/package.json dist/libs/ts-configurable/src",
     "copy-files": "run-s copy-readme copy-license copy-changelog copy-package-json"
   },
   "greenkeeper": {

@@ -44,6 +44,6 @@ A new version of the `ts-configurable` package can be published to npm like this
 
 ```
 $ npm run pack:lib
-$ cd dist/libs/ts-configurable
+$ cd dist/libs/ts-configurable/src
 $ npm publish
 ```

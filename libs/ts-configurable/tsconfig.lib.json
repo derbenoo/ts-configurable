@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "../../dist/libs/ts-configurable",
+    "outDir": "../../dist/",
     "target": "es6",
     "module": "commonjs",
     "moduleResolution": "node",
