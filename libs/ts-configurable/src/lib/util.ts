@@ -75,8 +75,6 @@ export function assignValuesByTemplate(
       if (typeof value !== 'object' || value === null) {
         if (!options.strictTypeChecking || typeof templateValue === typeof value) {
           obj[key] = value;
-        } else if (!options.strictObjectStructureChecking) {
-          obj[key] = value;
         } else {
           throw new TypeError(
             `Property '${parent}.${key}' is of type ${typeof templateValue} but a value of type ${typeof value} ('${JSON.stringify(
