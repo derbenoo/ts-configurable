@@ -1,7 +1,7 @@
 {
   "version": "0.2.1",
   "name": "ts-configurable",
-  "description": "",
+  "description": "Make all properties of a class configurable using only one decorator!",
   "keywords": [
     "config",
     "settings",
