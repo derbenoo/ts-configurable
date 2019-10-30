@@ -478,12 +478,16 @@ describe('libs/config: @Configurable() decorator', () => {
     @Configurable({ decryptionSecrets: [{ secret: 'secret2', type: 'raw' }] })
     class PizzaConfig extends BasePizzaConfig {
       creditcard = encrypt('secret2', '0123456');
+      account = {
+        ssn: encrypt('secret2', 'social_security_number'),
+      };
     }
 
     const config = new PizzaConfig();
     expect(config.creditcard).toBe('0123456');
     expect(config.id).toBe(5);
     expect(config.order.priceTotal).toBe(6.2);
+    expect(config.account.ssn).toBe('social_security_number'); // Test nested properties
   });
 
   it('Load decryption secret from environment to decrypt configuration value', () => {

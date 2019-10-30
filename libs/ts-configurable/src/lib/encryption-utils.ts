@@ -133,10 +133,11 @@ export function encrypt(secret: string, plaintext: string): string {
 
 /**
  * Decrypt the given ciphertext
- * @param key decryption key
+ * @param keyOrSecret decryption secret (string) or derived key (Buffer)
  * @param ciphertext ciphertext to decrypt
  */
-export function decrypt(key: Buffer, ciphertext: string): string {
+export function decrypt(keyOrSecret: Buffer | string, ciphertext: string): string {
+  const key = typeof keyOrSecret === 'string' ? keyFromSecret(keyOrSecret) : keyOrSecret;
   const { iv, encrypted } = deserializeCipher(ciphertext);
 
   // Decrypt value
