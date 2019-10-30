@@ -1,6 +1,8 @@
 {
-  "version": "0.3.0",
   "name": "ts-configurable",
+  "version": "0.3.1",
+  "license": "MIT",
+  "author": "Benjamin Assadsolimani (derbenoo)",
   "description": "Make all properties of a class configurable using only one decorator!",
   "keywords": [
     "config",
@@ -23,16 +25,9 @@
   "bugs": {
     "url": "https://github.com/derbenoo/ts-configurable/issues"
   },
-  "greenkeeper": {
-    "ignore": [
-      "dotenv"
-    ]
-  },
-  "license": "MIT",
   "homepage": "https://github.com/derbenoo/ts-configurable",
   "main": "./index.js",
   "types": "./index.d.ts",
-  "author": "Benjamin Assadsolimani (derbenoo)",
   "dependencies": {
     "dotenv": "~8.2.0",
     "nconf": "~0.10.0"

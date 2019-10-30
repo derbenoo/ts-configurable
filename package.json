@@ -1,7 +1,31 @@
 {
   "name": "ts-configurable",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "license": "MIT",
+  "author": "Benjamin Assadsolimani (derbenoo)",
+  "description": "Make all properties of a class configurable using only one decorator!",
+  "keywords": [
+    "config",
+    "settings",
+    "configuration",
+    "decorator",
+    "dotenv",
+    "argument",
+    "parser",
+    "environment",
+    "variables",
+    "args",
+    "argv",
+    "env"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:derbenoo/ts-configurable.git"
+  },
+  "bugs": {
+    "url": "https://github.com/derbenoo/ts-configurable/issues"
+  },
+  "homepage": "https://github.com/derbenoo/ts-configurable",
   "scripts": {
     "cleanup": "rm -r dist/ || true ; rm -r coverage/ || true ; rm -r test-results/ || true",
     "start": "ng serve",
@@ -19,11 +43,6 @@
     "copy-changelog": "cp CHANGELOG.md dist/libs/ts-configurable/src",
     "copy-package-json": "cp libs/ts-configurable/package.json dist/libs/ts-configurable/src",
     "copy-files": "run-s copy-readme copy-license copy-changelog copy-package-json"
-  },
-  "greenkeeper": {
-    "ignore": [
-      "dotenv"
-    ]
   },
   "dependencies": {
     "@nestjs/common": "^6.2.4",

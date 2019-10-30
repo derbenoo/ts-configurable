@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.3.1
+
+- Fixed error during packaging/ publishing which made the package unusable.
+
 ## 0.3.0
 
 - Add the `decrypt` option for specifying decryption secrets that are used to decrypt configuration values that are provided encrypted.
