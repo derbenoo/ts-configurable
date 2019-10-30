@@ -1,8 +1,9 @@
 import * as dotenv from 'dotenv'; // https://www.npmjs.com/package/dotenv
 import { Provider } from 'nconf'; // https://www.npmjs.com/package/nconf
 import { BaseConfig } from './base-config';
+import { getDecryptionKeys } from './encryption-utils';
 import { IConstructorOptions, IDecoratorOptions } from './interfaces';
-import { assignValuesByTemplate, isObject } from './util';
+import { assignValuesByTemplate, isObject } from './object-utils';
 
 /**
  * Get the final options object containing all options for the @Configurable() decorator.
@@ -26,6 +27,7 @@ function getOptions(
     strictTypeChecking: true,
     strictObjectStructureChecking: true,
     enforceReadonly: true,
+    decryptionSecrets: false,
   };
 
   return new Provider()
@@ -136,9 +138,17 @@ export function Configurable(decoratorOptions: IDecoratorOptions = {}) {
           dotenv.load(options.loadEnvFromFile);
         }
 
+        const decryptionKeys = getDecryptionKeys(options.decryptionSecrets);
         const config = getConfig<T>(options, ConfigClass, constructorOptions.config);
 
-        assignValuesByTemplate(this, new ConfigClass(), config, options, ConfigClass.name);
+        assignValuesByTemplate(
+          this,
+          new ConfigClass(),
+          config,
+          options,
+          decryptionKeys,
+          ConfigClass.name
+        );
       }
     };
   };

@@ -1,3 +1,4 @@
+import { attemptDecryption } from './encryption-utils';
 import { IDecoratorOptions } from './interfaces';
 
 /**
@@ -23,16 +24,28 @@ export function assignValuesByTemplate(
   template: object,
   config: object,
   options: IDecoratorOptions,
+  decryptionKeys: Buffer[],
   parent: string
 ) {
   Object.keys(template).forEach(key => {
     const templateValue = template[key];
-    const value = config[key];
+    let value = config[key];
+
+    if (decryptionKeys && decryptionKeys.length > 0) {
+      value = attemptDecryption(decryptionKeys, value);
+    }
 
     if (isObject(templateValue)) {
       if (isObject(value)) {
         obj[key] = {};
-        assignValuesByTemplate(obj[key], templateValue, value, options, `${parent}.${key}`);
+        assignValuesByTemplate(
+          obj[key],
+          templateValue,
+          value,
+          options,
+          decryptionKeys,
+          `${parent}.${key}`
+        );
       } else if (!options.strictObjectStructureChecking) {
         obj[key] = value;
       } else {

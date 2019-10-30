@@ -16,6 +16,31 @@ interface IArgvOptions {
   prefix?: string;
 }
 
+interface IDecryptionSecret {
+  type: 'env' | 'file' | 'raw';
+}
+
+export interface IDecryptionSecretRaw extends IDecryptionSecret {
+  type: 'raw';
+  secret: string;
+}
+
+export interface IDecryptionSecretFile extends IDecryptionSecret {
+  type: 'file';
+  filepath: string;
+  fileOptions?: { encoding?: null; flag?: string } | null;
+}
+
+export interface IDecryptionSecretEnvironment extends IDecryptionSecret {
+  type: 'env';
+  environmentVariable: string;
+}
+
+export type DecryptionSecret =
+  | IDecryptionSecretRaw
+  | IDecryptionSecretFile
+  | IDecryptionSecretEnvironment;
+
 /** Options for the @Configurable() decorator */
 export interface IDecoratorOptions {
   /** Whether to parse command line arguments (default: true) */
@@ -32,6 +57,8 @@ export interface IDecoratorOptions {
   enforceReadonly?: boolean;
   /** Apply environment variables from a file to the current process.env (default: true)*/
   loadEnvFromFile?: false | DotenvConfigOptions;
+  /** Decryption secrets used to attempt decryption of encrypted configuration values (default: false) */
+  decryptionSecrets?: false | DecryptionSecret[];
 }
 
 export interface IConstructorOptions<T> {

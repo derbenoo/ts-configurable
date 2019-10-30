@@ -2,6 +2,7 @@ import * as fs from 'fs';
 import * as os from 'os';
 import * as path from 'path';
 import { Configurable } from './configurable';
+import { encrypt } from './encryption-utils';
 
 /**
  * Keep test spec specific environment variable and command line argument prefixes to avoid collisions during parallel execution
@@ -458,5 +459,121 @@ describe('libs/config: @Configurable() decorator', () => {
         delivered: false,
       },
     });
+  });
+
+  /** Decryption */
+  it('Ignore encrypted configuration value if no decryption secrets were provided', () => {
+    const cipher = encrypt('secret1', '0123456');
+
+    @Configurable({})
+    class PizzaConfig {
+      creditcard = cipher;
+    }
+    const config = new PizzaConfig();
+
+    expect(config.creditcard).toBe(cipher);
+  });
+
+  it('Use raw decryption secret to decrypt configuration value', () => {
+    @Configurable({ decryptionSecrets: [{ secret: 'secret2', type: 'raw' }] })
+    class PizzaConfig extends BasePizzaConfig {
+      creditcard = encrypt('secret2', '0123456');
+    }
+
+    const config = new PizzaConfig();
+    expect(config.creditcard).toBe('0123456');
+    expect(config.id).toBe(5);
+    expect(config.order.priceTotal).toBe(6.2);
+  });
+
+  it('Load decryption secret from environment to decrypt configuration value', () => {
+    @Configurable({
+      decryptionSecrets: [
+        { environmentVariable: 'spec_configurable_j_secret', type: 'env' },
+        { environmentVariable: 'env_var_certainly_does_not_exist', type: 'env' },
+      ],
+    })
+    class PizzaConfig {
+      creditcard = encrypt('secret3', '0123456');
+    }
+
+    process.env.spec_configurable_j_secret = 'secret3';
+    const config = new PizzaConfig();
+    expect(config.creditcard).toBe('0123456');
+  });
+
+  it('Load decryption secret from file to decrypt configuration value', () => {
+    // Create temporary secret file
+    const secretFilepath = path.join(os.tmpdir(), '.spec_configurable_k_secret');
+    fs.writeFileSync(secretFilepath, 'secret4');
+
+    @Configurable({
+      decryptionSecrets: [
+        { filepath: secretFilepath, type: 'file' },
+        { filepath: 'this_file_certainly_does_not_exists', type: 'file' },
+      ],
+    })
+    class PizzaConfig {
+      creditcard = encrypt('secret4', '0123456');
+    }
+    const config = new PizzaConfig();
+
+    // Delete temporary secret file again
+    fs.unlinkSync(secretFilepath);
+
+    expect(config.creditcard).toBe('0123456');
+  });
+
+  it('Attempt to decrypt an encrypted configuration value using multiple secrets', () => {
+    const cipher4 = encrypt('secret8', '78');
+    @Configurable({
+      decryptionSecrets: [
+        { secret: 'wrong-secret', type: 'raw' },
+        { secret: 'secret5', type: 'raw' },
+        { secret: 'secret6', type: 'raw' },
+        { secret: 'secret7', type: 'raw' },
+      ],
+    })
+    class PizzaConfig {
+      creditcard1 = encrypt('secret5', '0123456');
+      creditcard2 = encrypt('secret6', '1234567');
+      creditcard3 = encrypt('secret7', '2345678');
+      creditcard4 = cipher4;
+    }
+
+    const config = new PizzaConfig();
+    expect(config.creditcard1).toBe('0123456');
+    expect(config.creditcard2).toBe('1234567');
+    expect(config.creditcard3).toBe('2345678');
+    expect(config.creditcard4).toBe(cipher4); // Could not be decrypted
+  });
+
+  it('Reject a falsly formatted encrypted value', () => {
+    const cipher1 = encrypt('secret9', '0123456').slice(1); // First character is missing
+
+    let cipher2 = encrypt('secret9', '0123456'); // Last character is missing
+    cipher2 = cipher2.substr(0, cipher2.length - 1);
+
+    const [prefix3, iv3, encrypted3] = encrypt('secret9', '0123456').split('.');
+    const cipher3 = `${prefix3}.${iv3.substr(1)}.${encrypted3}`;
+
+    const [prefix4, iv4, encrypted4] = encrypt('secret9', '0123456').split('.'); // Wrong IV length
+    const cipher4 = `${prefix4}.${iv4}a.${encrypted4}`;
+
+    @Configurable({
+      decryptionSecrets: [{ secret: 'secret9', type: 'raw' }],
+    })
+    class PizzaConfig {
+      creditcard1 = cipher1;
+      creditcard2 = cipher2;
+      creditcard3 = cipher3;
+      creditcard4 = cipher4;
+    }
+
+    const config = new PizzaConfig();
+    expect(config.creditcard1).toBe(cipher1);
+    expect(config.creditcard2).toBe(cipher2);
+    expect(config.creditcard3).toBe(cipher3);
+    expect(config.creditcard4).toBe(cipher4);
   });
 });
