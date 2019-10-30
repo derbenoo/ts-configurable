@@ -29,16 +29,20 @@
     "@nestjs/common": "^6.2.4",
     "@nestjs/core": "^6.2.4",
     "@nestjs/platform-express": "^6.2.4",
+    "reflect-metadata": "^0.1.12",
     "@nestjs/schematics": "~6.1.0",
     "@nestjs/testing": "~6.1.0",
     "@nestjs/typeorm": "~6.0.0",
     "dotenv": "~8.2.0",
     "nconf": "~0.10.0",
     "sqlite3": "~4.0.6",
-    "typeorm": "~0.2.15",
-    "reflect-metadata": "^0.1.12"
+    "typeorm": "~0.2.15"
   },
   "devDependencies": {
+    "@nrwl/node": "8.0.0",
+    "@nestjs/schematics": "^6.3.0",
+    "@nestjs/testing": "^6.2.4",
+    "@nrwl/nest": "8.0.0",
     "@angular-devkit/build-angular": "~0.800.0",
     "@angular-devkit/build-ng-packagr": "~0.800.0",
     "@angular/cli": "8.0.1",
@@ -60,10 +64,6 @@
     "tslint-no-focused-test": "~0.5.0",
     "typescript": "3.4.5",
     "@nrwl/workspace": "8.0.0",
-    "@nrwl/nest": "8.0.0",
-    "@nrwl/node": "8.0.0",
-    "@nrwl/jest": "8.0.0",
-    "@nestjs/schematics": "^6.3.0",
-    "@nestjs/testing": "^6.2.4"
+    "@nrwl/jest": "8.0.0"
   }
 }

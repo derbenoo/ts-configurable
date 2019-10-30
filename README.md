@@ -298,8 +298,14 @@ If multiple decryption secrets are provided, ts-configurable will attempt to dec
 
 You can encrypt configuration values via the `encrypt(secret: string, plaintext: string)` method that is being exported by the `ts-configurable` package. The typical workflow would be to encrypt the secret configuration value e.g., via a separate node invocation and then using the resulting ciphertext for configuring the application. Here is a simple `ts-node` example on how to encrypt a secret configuration value:
 
-```
-asdf
+```ts
+import { encrypt } from 'ts-configurable';
+
+const secret = 'secret_key';
+const value = 'sensitive_api_key';
+const cipher = encrypt(secret, value);
+console.log(`CIPHER: ${cipher}`);
+// output: CIPHER: $ENC$.f60399294c2152fe8bbffc1cd9e8d22a.e44f27a1290864635acc3fd32b09f66a086de3743a26479c85edb3724f9ca8ad
 ```
 
 ## :rotating_light: Troubleshooting

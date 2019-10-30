@@ -138,6 +138,60 @@
           }
         }
       }
+    },
+    "example-encryption": {
+      "root": "apps/example-encryption",
+      "sourceRoot": "apps/example-encryption/src",
+      "projectType": "application",
+      "prefix": "example-encryption",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/example-encryption",
+            "main": "apps/example-encryption/src/main.ts",
+            "tsConfig": "apps/example-encryption/tsconfig.app.json",
+            "assets": ["apps/example-encryption/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/example-encryption/src/environments/environment.ts",
+                  "with": "apps/example-encryption/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "example-encryption:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/example-encryption/tsconfig.app.json",
+              "apps/example-encryption/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/example-encryption/jest.config.js",
+            "tsConfig": "apps/example-encryption/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {
