@@ -132,6 +132,10 @@ Throw an error if a config entry is set to a value of a different type than the 
 
 Throw an error if a config entry is set to a value of a different structure than the default value (e.g., assigning an object to a primitive property) (default: true)
 
+##### options.decryptionSecrets: _`false`_ | `DecryptionSecret[]`
+Decryption secrets used to attempt decryption of encrypted configuration values (default: false)
+
+
 ## :ok_hand: Provide Options and Defaults via the Constructor
 
 By extending the `BaseConfig` class, both the options passed to the `@Configurable()` decorator as well as the default values assigned to the instance properties can be overriden via the constructor during instantiation:
@@ -282,6 +286,21 @@ The configuration loading hierarchy is listed below (1 = highest, 4 = lowest):
 4.  Defaults provided with the property definitions
 
 This behavior is implemented using the [nconf](https://www.npmjs.com/package/nconf) package. In short, each configuration source is converted into a partially filled configuration object. All those configuration objects are then merged with the precedence order listed above. This means that individual values can be set, even for nested properties!
+
+## :lock: Encrypted Configuration Values
+
+It is possible to provide encrypted configuration values. This is useful for secrets that should not be checked into source control but should be available as soon as the application is in possession of a single (or multiple) decryption secrets instead of having to provide each secret configuration value via environment variables. The decryption secrets are provided via the `decryptionSecrets` option. The following decryption secret types can be specified:
+* `raw`: the secret is directly provided as a string
+* `env`: the secret is read from the environment variable with the specified name (via: `environmentVariable`)
+* `file`: the secret is read from the file with the specified filepath (via: `filepath`)
+
+If multiple decryption secrets are provided, ts-configurable will attempt to decrypt each encrypted configuration value with all of the available keys. If a key could not be loaded, it is ignored. If an encrypted configuration value could not be successfully decrypted, it is left in its original, encrypted form.
+
+You can encrypt configuration values via the `encrypt(secret: string, plaintext: string)` method that is being exported by the `ts-configurable` package. The typical workflow would be to encrypt the secret configuration value e.g., via a separate node invocation and then using the resulting ciphertext for configuring the application. Here is a simple `ts-node` example on how to encrypt a secret configuration value:
+
+```
+asdf
+```
 
 ## :rotating_light: Troubleshooting
 
