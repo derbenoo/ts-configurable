@@ -34,7 +34,7 @@
   "types": "./index.d.ts",
   "author": "Benjamin Assadsolimani (derbenoo)",
   "dependencies": {
-    "dotenv": "~6.2.0",
+    "dotenv": "~8.2.0",
     "nconf": "~0.10.0"
   }
 }

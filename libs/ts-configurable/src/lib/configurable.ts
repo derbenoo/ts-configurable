@@ -135,7 +135,7 @@ export function Configurable(decoratorOptions: IDecoratorOptions = {}) {
         const options = getOptions(decoratorOptions, constructorOptions.options);
 
         if (options.loadEnvFromFile) {
-          dotenv.load(options.loadEnvFromFile);
+          dotenv.config(options.loadEnvFromFile);
         }
 
         const decryptionKeys = getDecryptionKeys(options.decryptionSecrets);
