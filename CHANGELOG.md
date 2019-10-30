@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.0.0
+
+- Breaking changes: values are base64 encoded before being encrypted and base64 decoded after being decrypted. This way, when providing multiple keys, a correct decryption can be determined by checking whether the plaintext only contains charactesr from the base64 characterset.
+- Export the `decrypt` method from the package so the consumer can test the correct functionality of encryption and decryption.
+
 ## 0.3.1
 
 - Fixed error during packaging/ publishing which made the package unusable.

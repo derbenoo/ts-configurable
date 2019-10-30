@@ -122,9 +122,9 @@ export function encrypt(secret: string, plaintext: string): string {
   // Generate random IV
   const iv = randomBytes(ivBytelength);
 
-  // Encrypt plaintext
+  // Encrypt base64-encoded plaintext
   const cipher = createCipheriv(cipherAlgorithm, key, iv);
-  let encrypted = cipher.update(plaintext);
+  let encrypted = cipher.update(Buffer.from(plaintext).toString('base64'));
   encrypted = Buffer.concat([encrypted, cipher.final()]);
 
   // Return the serialized cipher (its string representation)
@@ -144,7 +144,7 @@ export function decrypt(keyOrSecret: Buffer | string, ciphertext: string): strin
   const decipher = createDecipheriv(cipherAlgorithm, key, iv);
   let decrypted = decipher.update(encrypted);
   decrypted = Buffer.concat([decrypted, decipher.final()]);
-  const plaintext = decrypted.toString();
+  const plaintext = Buffer.from(decrypted.toString(), 'base64').toString();
 
   return plaintext;
 }

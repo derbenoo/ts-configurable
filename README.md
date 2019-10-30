@@ -305,7 +305,7 @@ const secret = 'secret_key';
 const value = 'sensitive_api_key';
 const cipher = encrypt(secret, value);
 console.log(`CIPHER: ${cipher}`);
-// output: CIPHER: $ENC$.f60399294c2152fe8bbffc1cd9e8d22a.e44f27a1290864635acc3fd32b09f66a086de3743a26479c85edb3724f9ca8ad
+// output: CIPHER: $ENC$.6aaa302f81c67ce6fe2da026ba7a2d0b.91b5db5ffea63e0d2c89c350760ca54152e6d4b5526ef06f8d6952407120891c
 ```
 
 ## :rotating_light: Troubleshooting
