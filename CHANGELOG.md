@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.0.0
+- Breaking changes: options object for decryption changed: from `decryptionSecrets` to `decryption`: `secrets`, `setNullOnDecryptionFailure`
+- Implement setNullOnDecryptionFailure flag
+
 ## 1.0.0
 
 - Breaking changes: values are base64 encoded before being encrypted and base64 decoded after being decrypted. This way, when providing multiple keys, a correct decryption can be determined by checking whether the plaintext only contains charactesr from the base64 characterset.

@@ -92,8 +92,8 @@ function loadSecretFromEnvironmentVariable(environmentVariable: string): string 
   return secret;
 }
 
-export function getDecryptionKeys(secrets: false | DecryptionSecret[]): null | Buffer[] {
-  const keys = (secrets || [])
+export function getDecryptionKeys(secrets: DecryptionSecret[]): null | Buffer[] {
+  const keys = secrets
     .filter(secret => !!secret)
     .map(secret => {
       switch (secret.type) {
@@ -155,12 +155,15 @@ export function attemptDecryption(keys: Buffer[], ciphertext: any): any {
     return ciphertext;
   }
 
+  // Attempt decryption with all of the provided keys
   for (const key of keys) {
     try {
       const plaintext = decrypt(key, ciphertext);
+      // Decryption successful, return plaintext
       return plaintext;
     } catch (err) {}
   }
 
-  return ciphertext;
+  // Decryption not successful, throw an error
+  throw Error('Could not decrypt ciphertext!');
 }

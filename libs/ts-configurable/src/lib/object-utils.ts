@@ -1,4 +1,4 @@
-import { attemptDecryption } from './encryption-utils';
+import { attemptDecryption, decrypt } from './encryption-utils';
 import { IDecoratorOptions } from './interfaces';
 
 /**
@@ -11,12 +11,18 @@ export function isObject(val: any): boolean {
   );
 }
 
+export interface IDecryptionOptions {
+  keys: Buffer[];
+  setNullOnDecryptionFailure: boolean;
+}
+
 /**
  * Assign values to an object based on a template object's properties and their respective types
  * @param obj Object to set the properties on
  * @param template Template object which is used to determine which properties should be set on the object and of what type those properties are
  * @param config Config object containing all values for the properties to be set for the object
  * @param options Options object
+ * @param decryption Decryption options
  * @param parent Contains the current nested position in the object using the nested object dot notation (e.g. "obj1.nestedobj2.obj3"), used for error messages only
  */
 export function assignValuesByTemplate(
@@ -24,15 +30,23 @@ export function assignValuesByTemplate(
   template: object,
   config: object,
   options: IDecoratorOptions,
-  decryptionKeys: Buffer[],
+  decryption: false | IDecryptionOptions,
   parent: string
 ) {
   Object.keys(template).forEach(key => {
     const templateValue = template[key];
     let value = config[key];
 
-    if (decryptionKeys && decryptionKeys.length > 0) {
-      value = attemptDecryption(decryptionKeys, value);
+    if (decryption) {
+      try {
+        value = attemptDecryption(decryption.keys, value);
+      } catch (err) {
+        // Decryption was not successful
+        if (decryption.setNullOnDecryptionFailure) {
+          obj[key] = null;
+          return;
+        }
+      }
     }
 
     if (isObject(templateValue)) {
@@ -43,7 +57,7 @@ export function assignValuesByTemplate(
           templateValue,
           value,
           options,
-          decryptionKeys,
+          decryption,
           `${parent}.${key}`
         );
       } else if (!options.strictObjectStructureChecking) {

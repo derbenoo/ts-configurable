@@ -132,8 +132,8 @@ Throw an error if a config entry is set to a value of a different type than the 
 
 Throw an error if a config entry is set to a value of a different structure than the default value (e.g., assigning an object to a primitive property) (default: true)
 
-##### options.decryptionSecrets: _`false`_ | `DecryptionSecret[]`
-Decryption secrets used to attempt decryption of encrypted configuration values (default: false)
+##### options.decryption: _`false`_ | `IDecryptionOptions`
+Whether to attempt decryption of encrypted configuration values (default: false)
 
 
 ## :ok_hand: Provide Options and Defaults via the Constructor

@@ -41,6 +41,13 @@ export type DecryptionSecret =
   | IDecryptionSecretFile
   | IDecryptionSecretEnvironment;
 
+export interface IDecryptionOptions {
+  /** Decryption secrets each used to attempt the decryption of any encrypted configuration value */
+  secrets: DecryptionSecret[];
+  /** Whether to set a non-decryptable configuration value to null (default: false) */
+  setNullOnDecryptionFailure?: boolean;
+}
+
 /** Options for the @Configurable() decorator */
 export interface IDecoratorOptions {
   /** Whether to parse command line arguments (default: true) */
@@ -57,8 +64,8 @@ export interface IDecoratorOptions {
   enforceReadonly?: boolean;
   /** Apply environment variables from a file to the current process.env (default: true)*/
   loadEnvFromFile?: false | DotenvConfigOptions;
-  /** Decryption secrets used to attempt decryption of encrypted configuration values (default: false) */
-  decryptionSecrets?: false | DecryptionSecret[];
+  /** Whether to attempt decryption of encrypted configuration values (default: false) */
+  decryption?: false | IDecryptionOptions;
 }
 
 export interface IConstructorOptions<T> {

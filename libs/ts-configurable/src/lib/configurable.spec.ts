@@ -475,7 +475,7 @@ describe('libs/config: @Configurable() decorator', () => {
   });
 
   it('Use raw decryption secret to decrypt configuration value', () => {
-    @Configurable({ decryptionSecrets: [{ secret: 'secret2', type: 'raw' }] })
+    @Configurable({ decryption: { secrets: [{ secret: 'secret2', type: 'raw' }] } })
     class PizzaConfig extends BasePizzaConfig {
       creditcard = encrypt('secret2', '0123456');
       account = {
@@ -492,10 +492,12 @@ describe('libs/config: @Configurable() decorator', () => {
 
   it('Load decryption secret from environment to decrypt configuration value', () => {
     @Configurable({
-      decryptionSecrets: [
-        { environmentVariable: 'spec_configurable_j_secret', type: 'env' },
-        { environmentVariable: 'env_var_certainly_does_not_exist', type: 'env' },
-      ],
+      decryption: {
+        secrets: [
+          { environmentVariable: 'spec_configurable_j_secret', type: 'env' },
+          { environmentVariable: 'env_var_certainly_does_not_exist', type: 'env' },
+        ],
+      },
     })
     class PizzaConfig {
       creditcard = encrypt('secret3', '0123456');
@@ -512,10 +514,12 @@ describe('libs/config: @Configurable() decorator', () => {
     fs.writeFileSync(secretFilepath, 'secret4');
 
     @Configurable({
-      decryptionSecrets: [
-        { filepath: secretFilepath, type: 'file' },
-        { filepath: 'this_file_certainly_does_not_exists', type: 'file' },
-      ],
+      decryption: {
+        secrets: [
+          { filepath: secretFilepath, type: 'file' },
+          { filepath: 'this_file_certainly_does_not_exists', type: 'file' },
+        ],
+      },
     })
     class PizzaConfig {
       creditcard = encrypt('secret4', '0123456');
@@ -531,12 +535,14 @@ describe('libs/config: @Configurable() decorator', () => {
   it('Attempt to decrypt an encrypted configuration value using multiple secrets', () => {
     const cipher4 = encrypt('secret8', '78');
     @Configurable({
-      decryptionSecrets: [
-        { secret: 'wrong-secret', type: 'raw' },
-        { secret: 'secret5', type: 'raw' },
-        { secret: 'secret6', type: 'raw' },
-        { secret: 'secret7', type: 'raw' },
-      ],
+      decryption: {
+        secrets: [
+          { secret: 'wrong-secret', type: 'raw' },
+          { secret: 'secret5', type: 'raw' },
+          { secret: 'secret6', type: 'raw' },
+          { secret: 'secret7', type: 'raw' },
+        ],
+      },
     })
     class PizzaConfig {
       creditcard1 = encrypt('secret5', '0123456');
@@ -565,7 +571,7 @@ describe('libs/config: @Configurable() decorator', () => {
     const cipher4 = `${prefix4}.${iv4}a.${encrypted4}`;
 
     @Configurable({
-      decryptionSecrets: [{ secret: 'secret9', type: 'raw' }],
+      decryption: { secrets: [{ secret: 'secret9', type: 'raw' }] },
     })
     class PizzaConfig {
       creditcard1 = cipher1;
@@ -579,5 +585,39 @@ describe('libs/config: @Configurable() decorator', () => {
     expect(config.creditcard2).toBe(cipher2);
     expect(config.creditcard3).toBe(cipher3);
     expect(config.creditcard4).toBe(cipher4);
+  });
+
+  it('Keep non-decryptable configuration value with "setNullOnDecryptionFailure=false"', () => {
+    const cipher1 = encrypt('secret10', '0123456');
+
+    @Configurable({
+      decryption: {
+        secrets: [],
+        setNullOnDecryptionFailure: false,
+      },
+    })
+    class PizzaConfig {
+      creditcard1 = cipher1;
+    }
+
+    const config = new PizzaConfig();
+    expect(config.creditcard1).toBe(cipher1);
+  });
+
+  it('Set non-decryptable configuration value to "null" with "setNullOnDecryptionFailure=true"', () => {
+    const cipher1 = encrypt('secret10', '0123456');
+
+    @Configurable({
+      decryption: {
+        secrets: [],
+        setNullOnDecryptionFailure: true,
+      },
+    })
+    class PizzaConfig {
+      creditcard1 = cipher1;
+    }
+
+    const config = new PizzaConfig();
+    expect(config.creditcard1).toBe(null);
   });
 });
