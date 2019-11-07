@@ -31,7 +31,7 @@
     "start": "ng serve",
     "build": "ng build",
     "pack:lib": "rm -r dist/libs/ts-configurable || true && tsc --build libs/ts-configurable/tsconfig.lib.json && npm run copy-files",
-    "test": "ng test",
+    "test": "ng test --passWithNoTests",
     "lint": "./node_modules/.bin/nx lint && ng lint",
     "format": "./node_modules/.bin/nx format:write",
     "format:write": "./node_modules/.bin/nx format:write",
