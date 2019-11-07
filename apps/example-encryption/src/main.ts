@@ -6,7 +6,7 @@ const cipher = encrypt(secret, value);
 
 console.log(`Encrypted config: ${cipher}`);
 
-@Configurable({ decryptionSecrets: [{ type: 'raw', secret }] })
+@Configurable({ decryption: { secrets: [{ type: 'raw', secret }] } })
 class Config {
   apiKey: string = cipher;
 }

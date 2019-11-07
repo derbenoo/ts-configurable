@@ -1,5 +1,8 @@
 # CHANGELOG
 
+## 2.0.1
+- Fix a bug where non-ciphertext string values where set to null with setNullOnDecryptionFailure=true
+
 ## 2.0.0
 - Breaking changes: options object for decryption changed: from `decryptionSecrets` to `decryption`: `secrets`, `setNullOnDecryptionFailure`
 - Implement setNullOnDecryptionFailure flag

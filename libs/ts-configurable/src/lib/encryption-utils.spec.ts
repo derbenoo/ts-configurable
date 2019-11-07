@@ -6,4 +6,10 @@ describe('libs/config: Encryption utils', () => {
     const value = 'test123';
     expect(decrypt(secret, encrypt(secret, value))).toBe(value);
   });
+
+  it('Throw an error when attempting to decrypt a value that is not a valid ciphertext', () => {
+    expect(() => {
+      decrypt('secret_key', 'totally_normal_value');
+    }).toThrow();
+  });
 });

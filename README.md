@@ -289,7 +289,7 @@ This behavior is implemented using the [nconf](https://www.npmjs.com/package/nco
 
 ## :lock: Encrypted Configuration Values
 
-It is possible to provide encrypted configuration values. This is useful for secrets that should not be checked into source control but should be available as soon as the application is in possession of a single (or multiple) decryption secrets instead of having to provide each secret configuration value via environment variables. The decryption secrets are provided via the `decryptionSecrets` option. The following decryption secret types can be specified:
+It is possible to provide encrypted configuration values. This is useful for secrets that should not be checked into source control but should be available as soon as the application is in possession of a single (or multiple) decryption secrets instead of having to provide each secret configuration value via environment variables. The decryption secrets are provided via the `decryption` option. The following decryption secret types can be specified:
 * `raw`: the secret is directly provided as a string
 * `env`: the secret is read from the environment variable with the specified name (via: `environmentVariable`)
 * `file`: the secret is read from the file with the specified filepath (via: `filepath`)

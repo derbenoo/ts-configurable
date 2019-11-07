@@ -41,7 +41,7 @@ function deserializeCipher(ciphertext: string) {
     ivStr.length !== 2 * ivBytelength ||
     !encryptedStr
   ) {
-    throw Error();
+    return null;
   }
 
   const iv = Buffer.from(ivStr, 'hex');
@@ -136,9 +136,13 @@ export function encrypt(secret: string, plaintext: string): string {
  * @param keyOrSecret decryption secret (string) or derived key (Buffer)
  * @param ciphertext ciphertext to decrypt
  */
-export function decrypt(keyOrSecret: Buffer | string, ciphertext: string): string {
+export function decrypt(keyOrSecret: Buffer | string, ciphertext: string): string | null {
   const key = typeof keyOrSecret === 'string' ? keyFromSecret(keyOrSecret) : keyOrSecret;
-  const { iv, encrypted } = deserializeCipher(ciphertext);
+  const res = deserializeCipher(ciphertext);
+  if (!res) {
+    throw Error('Invalid ciphertext!');
+  }
+  const { iv, encrypted } = res;
 
   // Decrypt value
   const decipher = createDecipheriv(cipherAlgorithm, key, iv);
@@ -152,6 +156,11 @@ export function decrypt(keyOrSecret: Buffer | string, ciphertext: string): strin
 export function attemptDecryption(keys: Buffer[], ciphertext: any): any {
   // Only attempt decryption if the value is a string
   if (typeof ciphertext !== 'string') {
+    return ciphertext;
+  }
+
+  // Only attempt decryption is string is a valid ciphertext
+  if (!deserializeCipher(ciphertext)) {
     return ciphertext;
   }
 

@@ -598,10 +598,14 @@ describe('libs/config: @Configurable() decorator', () => {
     })
     class PizzaConfig {
       creditcard1 = cipher1;
+      topping = 'cheese';
     }
 
     const config = new PizzaConfig();
+    // Keep ciphertext
     expect(config.creditcard1).toBe(cipher1);
+    // Leave the topping alone
+    expect(config.topping).toBe('cheese');
   });
 
   it('Set non-decryptable configuration value to "null" with "setNullOnDecryptionFailure=true"', () => {
@@ -615,9 +619,13 @@ describe('libs/config: @Configurable() decorator', () => {
     })
     class PizzaConfig {
       creditcard1 = cipher1;
+      topping = 'cheese';
     }
 
     const config = new PizzaConfig();
+    // Remove the ciphertext
     expect(config.creditcard1).toBe(null);
+    // Leave the topping alone
+    expect(config.topping).toBe('cheese');
   });
 });
