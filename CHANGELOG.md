@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 2.1.0
+- In case a property is an object create a new instance of that object instead of using a POJO (https://github.com/derbenoo/ts-configurable/issues/37)
+-
+
 ## 2.0.1
 - Fix a bug where non-ciphertext string values where set to null with setNullOnDecryptionFailure=true
 
