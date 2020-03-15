@@ -19,7 +19,7 @@
 
 ---
 
-Let's be real, configuration is not sexy. We all just want to set up our project's configuration as easily as possible and then move on to build whatever we _actually_ wanted to build. But what if I told you that you can meet all your configuration needs with a single line of code and then never have to worry about it again?
+Let's be real, configuration is no fun. We all just want to set up our project's configuration as easily as possible and then move on to build whatever we _actually_ wanted to build. But what if I told you that you can meet all your configuration needs with a single line of code and then never have to worry about it again?
 
 Simply create a class defining all configuration properties, tack on the `@Configurable()` decorator and off you go! Take advantage of type-safety, environment variable loading, command line argument parsing and much more right out-of-the-box.
 
