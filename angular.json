@@ -32,7 +32,7 @@
               "libs/ts-configurable/tsconfig.lib.json",
               "libs/ts-configurable/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!libs/ts-configurable/**"]
           }
         },
         "test": {
@@ -41,7 +41,8 @@
             "jestConfig": "libs/ts-configurable/jest.config.js",
             "tsConfig": "libs/ts-configurable/tsconfig.spec.json",
             "ci": true,
-            "runInBand": true
+            "runInBand": true,
+            "passWithNoTests": true
           }
         }
       },
@@ -84,7 +85,7 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": ["apps/example-webserver/tsconfig.app.json"],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!apps/example-webserver/**"]
           }
         }
       }
@@ -127,14 +128,15 @@
               "apps/example-nestjs/tsconfig.app.json",
               "apps/example-nestjs/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!apps/example-nestjs/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/example-nestjs/jest.config.js",
-            "tsConfig": "apps/example-nestjs/tsconfig.spec.json"
+            "tsConfig": "apps/example-nestjs/tsconfig.spec.json",
+            "passWithNoTests": true
           }
         }
       }
@@ -181,14 +183,15 @@
               "apps/example-encryption/tsconfig.app.json",
               "apps/example-encryption/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**"]
+            "exclude": ["**/node_modules/**", "!apps/example-encryption/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "apps/example-encryption/jest.config.js",
-            "tsConfig": "apps/example-encryption/tsconfig.spec.json"
+            "tsConfig": "apps/example-encryption/tsconfig.spec.json",
+            "passWithNoTests": true
           }
         }
       }
