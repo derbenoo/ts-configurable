@@ -19,9 +19,7 @@ The recommended IDE for developing is [Visual Studio Code (VSCode)](https://code
 A development environment can be created using [docker](https://www.docker.com/get-started) and [docker-compose](https://docs.docker.com/compose/install/):
 
 ```
-$ cd tools/
-$ docker-compose up --build -d
-$ docker exec -it node-dev bash
+$ ./start-dev-container.sh
 ```
 
 All dependencies have to be initially installed using npm:
