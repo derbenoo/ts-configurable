@@ -51,7 +51,7 @@ export function assignValuesByTemplate(
 
     if (isObject(templateValue)) {
       if (isObject(value)) {
-        obj[key] = {};
+        obj[key] = new templateValue.constructor();
         assignValuesByTemplate(
           obj[key],
           templateValue,
