@@ -459,6 +459,36 @@ describe('libs/config: @Configurable() decorator', () => {
         delivered: false,
       },
     });
+    expect(config.order).toBeInstanceOf(OrderConfig);
+  });
+  
+  it('Allows methods on properties that are classes themselves', () => {
+    class OrderConfig {
+      delivered = false;
+      isCompleted() {
+        return this.delivered;
+      }
+    }
+
+    @Configurable()
+    class PizzaConfig {
+      id = 1;
+      order = new OrderConfig();
+    }
+
+    expect(() => {
+      const _ = new PizzaConfig();
+    }).not.toThrow();
+
+    const config = new PizzaConfig();
+    expect(config).toEqual({
+      id: 1,
+      order: {
+        delivered: false,
+      },
+    });
+    expect(config.order).toBeInstanceOf(OrderConfig);
+    expect(config.order.isCompleted()).toBe(false);
   });
 
   /** Decryption */
